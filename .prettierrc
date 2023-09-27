@@ -1,0 +1,33 @@
+{
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": true,
+  "bracketSameLine": false,
+  "arrowParens": "avoid",
+  "importOrder": [
+    "(.*next.*)",
+    "(.*react.*)",
+    "<THIRD_PARTY_MODULES>",
+    "^@/components/screens",
+    "^@/components/layout",
+    "^@/components/shared",
+    "^@/components/providers",
+    "^@/shared/presets",
+    "^@/shared/hooks",
+    "^@/shared/types",
+    "^@/store",
+    "^@/",
+    "^(.*component)$",
+    "^(.*.interface)$",
+    "^(.*.type)$",
+    "^@/",
+    "^@/assets/styles/*",
+    "^(.*.module.scss)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
+}

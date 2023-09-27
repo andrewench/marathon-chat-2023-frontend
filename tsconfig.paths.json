@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/components/screens": ["components/screens"],
+      "@/components/layout": ["components/layout"],
+      "@/components/ui": ["components/ui"],
+      "@/store": ["store"],
+      "@/store/slices": ["store/slices"],
+      "@/shared/presets": ["shared/presets"],
+      "@/shared/hooks": ["shared/hooks"],
+      "@/shared/types": ["shared/types"],
+      "@/*": ["./*"]
+    }
+  }
+}
