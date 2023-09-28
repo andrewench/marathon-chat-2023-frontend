@@ -1,9 +1,14 @@
 import Image from 'next/image'
 
 import { AlignRight } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useRef } from 'react'
+
+import cn from 'clsx'
+import { animate, motion } from 'framer-motion'
 
 import { Flex, ScrollBox, SideBarMenu } from '@/components/layout'
+
+import { Avatar } from '@/components/shared'
 
 import {
   HexagonBackdropIcon,
@@ -11,61 +16,109 @@ import {
   HexagonOutlineIcon,
 } from '@/components/icons'
 
-import { useActions } from '@/shared/hooks'
+import { useActions, useAppSelector } from '@/shared/hooks'
+
+import { app } from '@/store/slices'
 
 import styles from './sidebar.module.scss'
 
 export const SideBar: FC = () => {
-  const { toggleSideBar } = useActions()
+  const sideBarRef = useRef<HTMLDivElement>(null)
+
+  const { setSideBar } = useActions()
+
+  const { sideBar } = useAppSelector(app)
+
+  const clickHandler = () => {
+    if (!sideBarRef.current) return
+
+    if (sideBar.isOpen) {
+      animate(
+        sideBarRef.current,
+        {
+          width: 70,
+        },
+        {
+          duration: 0.3,
+        },
+      )
+
+      setSideBar(false)
+    } else {
+      animate(
+        sideBarRef.current,
+        {
+          width: 262,
+        },
+        {
+          duration: 0.3,
+        },
+      )
+
+      setSideBar(true)
+    }
+  }
 
   return (
-    <ScrollBox>
-      <div className={styles.box}>
-        <div className={styles.stickyBox}>
-          <Flex content="space-between">
-            <Image
-              src="/logo.svg"
-              alt="Logo"
-              width={27}
-              height={27}
-              draggable={false}
-            />
-
-            <button className={styles.toggle} onClick={() => toggleSideBar()}>
-              <AlignRight />
-            </button>
-          </Flex>
-
-          <Flex direction="column" className={styles.avatarBox}>
-            <div className={styles.avatarBorders}>
-              <HexagonBackdropIcon dataRole="hexagon-backdrop" />
-              <HexagonBackdropIcon dataRole="hexagon-backdrop-rotate" />
-
-              <HexagonOutlineIcon dataRole="hexagon-icon-outline" />
-            </div>
-
-            <div className={styles.avatar}>
-              <HexagonMaskIcon id="avatar-hexagon-mask" />
-
+    <motion.div
+      ref={sideBarRef}
+      initial={{ width: 262 }}
+      className={styles.box}
+    >
+      <ScrollBox>
+        <div
+          className={cn(styles.innerBox, {
+            [styles.minimized]: !sideBar.isOpen,
+          })}
+        >
+          <div className={styles.stickyBox}>
+            <Flex
+              align="center"
+              content="space-between"
+              className={cn(styles.logoBox, {
+                [styles.minimized]: !sideBar.isOpen,
+              })}
+            >
               <Image
-                src="/avatar.png"
-                alt="Avatar"
-                fill
-                quality={100}
-                priority={true}
+                src="/logo.svg"
+                alt="Logo"
+                width={27}
+                height={27}
                 draggable={false}
               />
+
+              <button className={styles.toggle} onClick={clickHandler}>
+                <AlignRight />
+              </button>
+            </Flex>
+
+            <Flex direction="column" className={styles.avatarBox}>
+              {sideBar.isOpen ? (
+                <Avatar variant="normal" />
+              ) : (
+                <Avatar variant="mini" />
+              )}
+            </Flex>
+
+            <div className={styles.divider}></div>
+
+            <div
+              className={cn(styles.meta, {
+                [styles.hide]: !sideBar.isOpen,
+              })}
+            >
+              <h1 className={styles.username}>Haris Ahmed</h1>
+              <h2 className={styles.specialty}>Assistant professor</h2>
             </div>
-          </Flex>
+          </div>
 
-          <div className={styles.divider}></div>
-
-          <h1 className={styles.username}>Haris Ahmed</h1>
-          <h2 className={styles.specialty}>Assistant professor</h2>
+          <SideBarMenu
+            className={cn(styles.menu, {
+              [styles.minimized]: !sideBar.isOpen,
+            })}
+          />
         </div>
-
-        <SideBarMenu className={styles.menu} />
-      </div>
-    </ScrollBox>
+      </ScrollBox>
+    </motion.div>
   )
 }

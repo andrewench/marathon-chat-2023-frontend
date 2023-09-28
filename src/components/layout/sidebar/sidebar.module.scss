@@ -1,9 +1,25 @@
 .box {
-  @apply min-w-[262px] w-[262px] bg-marathon-black border-r-[1px] border-r-[#32343f] px-6 py-9;
+  @apply bg-marathon-black border-r-[1px] border-r-[#32343f] flex-shrink-0;
+}
+
+.innerBox {
+  &:not(.minimized) {
+    @apply px-6 py-9;
+  }
+
+  &.minimized {
+    @apply px-2;
+  }
 }
 
 .stickyBox {
   @apply sticky top-10 z-[100] bg-marathon-black pb-5;
+}
+
+.logoBox {
+  &.minimized {
+    @apply pl-4 gap-2 flex-wrap;
+  }
 }
 
 .toggle {
@@ -37,18 +53,34 @@
   }
 }
 
+.miniAvatar {
+  clip-path: url('#avatar-mini-hexagon-mask');
+
+  & > img {
+    @apply object-cover;
+  }
+}
+
 .divider {
   @apply h-[2px] my-5 w-[90%] mx-auto bg-[#1d1e2b];
 }
 
+.meta {
+  &.hide {
+    @apply hidden;
+  }
+}
+
 .username {
-  @apply text-white text-center text-xl font-medium;
+  @apply text-white text-center text-xl font-medium whitespace-nowrap;
 }
 
 .specialty {
-  @apply text-[#B3B3BD] text-[0.75rem] text-center;
+  @apply text-[#B3B3BD] text-[0.75rem] text-center whitespace-nowrap;
 }
 
 .menu {
-  @apply mt-5;
+  &:not(.minimized) {
+    @apply mt-5;
+  }
 }

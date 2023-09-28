@@ -3,10 +3,18 @@
 }
 
 .button {
-  @apply relative flex gap-3 py-3 px-8 w-full;
+  @apply relative flex gap-3 w-full;
+
+  &:not(.minimized) {
+    @apply py-3 px-8;
+  }
+
+  &.minimized {
+    @apply justify-center py-2;
+  }
 
   &:hover {
-    @apply rounded-full text-white;
+    @apply text-white rounded-full;
 
     background: linear-gradient(135deg, #01e0f0, #da2dff, #dc8962);
   }

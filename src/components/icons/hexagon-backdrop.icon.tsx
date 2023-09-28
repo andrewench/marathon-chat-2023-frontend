@@ -3,9 +3,9 @@ import { FC } from 'react'
 export const HexagonBackdropIcon: FC<{ dataRole: string }> = ({ dataRole }) => {
   return (
     <svg
-      width="159"
+      width="160"
       height="176"
-      viewBox="0 0 159 176"
+      viewBox="0 0 160 176"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       data-role={dataRole}

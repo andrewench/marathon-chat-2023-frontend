@@ -1,0 +1,61 @@
+.box {
+  @apply relative mx-auto;
+
+  &.normal {
+    @apply w-[132px] h-[152px];
+  }
+
+  &.mini {
+    @apply w-[48px] h-[53px];
+  }
+}
+
+.avatar {
+  @apply mx-auto relative;
+
+  &.normal {
+    @apply w-[140px] h-[160px];
+
+    clip-path: url('#avatar-hexagon-mask');
+  }
+
+  &.mini {
+    @apply w-[48px] h-[53px];
+
+    clip-path: url('#avatar-hexagon-mask-mini');
+  }
+
+  transform: translateZ(0);
+
+  & > img {
+    @apply object-cover;
+  }
+}
+
+.backdrop {
+  @apply absolute left-[calc(50%-80px)] top-[calc(50%-86px)];
+
+  &.normal {
+    & > svg[data-role='hexagon-backdrop-rotate'] {
+      @apply absolute -left-1 -top-[2px] rotate-90;
+    }
+
+    & > svg[data-role='hexagon-icon-outline'] {
+      @apply absolute top-[calc(50%-64px)] left-[calc(50%-55px)] z-50;
+    }
+  }
+
+  &.mini {
+    & > svg[data-role='hexagon-backdrop'] {
+      @apply absolute left-0 -top-[2px];
+
+      transform: scale(0.36);
+    }
+
+    & > svg[data-role='hexagon-backdrop-rotate'] {
+      @apply absolute -left-[2px] -top-[2px];
+
+      transform: scale(0.36) rotate(90deg);
+    }
+  }
+}
