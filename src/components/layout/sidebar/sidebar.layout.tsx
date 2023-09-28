@@ -11,9 +11,13 @@ import {
   HexagonOutlineIcon,
 } from '@/components/icons'
 
+import { useActions } from '@/shared/hooks'
+
 import styles from './sidebar.module.scss'
 
 export const SideBar: FC = () => {
+  const { toggleSideBar } = useActions()
+
   return (
     <ScrollBox>
       <div className={styles.box}>
@@ -27,7 +31,7 @@ export const SideBar: FC = () => {
               draggable={false}
             />
 
-            <button className={styles.toggle}>
+            <button className={styles.toggle} onClick={() => toggleSideBar()}>
               <AlignRight />
             </button>
           </Flex>
