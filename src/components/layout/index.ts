@@ -1,1 +1,6 @@
 export { PageLayout } from './page/page.layout'
+export { Flex } from './flex/flex.component'
+export { SideBar } from './sidebar/sidebar.layout'
+export { Content } from './content/content.layout'
+export { SideBarMenu } from './sidebar-menu/sidebar-menu.layout'
+export { ScrollBox } from './scrollbox/scrollbox.layout'

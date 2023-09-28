@@ -8,3 +8,19 @@ body,
 
   -webkit-font-smoothing: antialiased;
 }
+
+.simplebar-content-wrapper:focus {
+  @apply outline-none;
+}
+
+.simplebar-scrollbar {
+  @apply scroll-smooth will-change-transform;
+
+  &::before {
+    background-color: #232323 !important;
+  }
+}
+
+.simplebar-track.simplebar-vertical {
+  width: 8px !important;
+}

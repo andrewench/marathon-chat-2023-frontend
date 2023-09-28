@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import 'simplebar-react/dist/simplebar.min.css'
 
 import { StoreProvider } from './store.provider'
 

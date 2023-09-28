@@ -1,0 +1,53 @@
+.box {
+  @apply flex;
+
+  &:not(.column).reversed {
+    @apply flex-row-reverse;
+  }
+}
+
+.column {
+  &:not(.reversed) {
+    @apply flex-col;
+  }
+
+  & .reversed {
+    @apply flex-col-reverse;
+  }
+}
+
+.alignStart {
+  @apply items-start;
+}
+
+.alignCenter {
+  @apply items-center;
+}
+
+.alignEnd {
+  @apply items-end;
+}
+
+.contentStart {
+  @apply justify-start;
+}
+
+.contentCenter {
+  @apply justify-center;
+}
+
+.contentEnd {
+  @apply justify-end;
+}
+
+.contentBetween {
+  @apply justify-between;
+}
+
+.contentAround {
+  @apply justify-around;
+}
+
+.contentEvenly {
+  @apply justify-evenly;
+}

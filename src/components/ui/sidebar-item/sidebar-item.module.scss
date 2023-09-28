@@ -1,0 +1,35 @@
+.item {
+  @apply text-[#807f8d] font-light;
+}
+
+.button {
+  @apply relative flex gap-3 py-3 px-8 w-full;
+
+  &:hover {
+    @apply rounded-full text-white;
+
+    background: linear-gradient(135deg, #01e0f0, #da2dff, #dc8962);
+  }
+
+  &:hover::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: inherit;
+    height: 100%;
+    border-radius: 30px;
+    mix-blend-mode: normal;
+    background: radial-gradient(100px at 50% bottom, #2f78d3, transparent);
+  }
+
+  & > svg {
+    z-index: 100;
+  }
+}
+
+.text {
+  z-index: 100;
+}

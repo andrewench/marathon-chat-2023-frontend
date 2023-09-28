@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <html lang='en'>
+    <html lang="en">
       <body className={inter.className}>{children}</body>
     </html>
   )

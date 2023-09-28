@@ -6,6 +6,7 @@
       "@/components/providers": ["components/providers"],
       "@/components/layout": ["components/layout"],
       "@/components/ui": ["components/ui"],
+      "@/components/icons": ["components/icons"],
       "@/store": ["store"],
       "@/store/slices": ["store/slices"],
       "@/shared/presets": ["shared/presets"],

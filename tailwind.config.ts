@@ -3,7 +3,11 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: ['./src/components/**/*.tsx', './src/app/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'marathon-black': '#00010d',
+      },
+    },
   },
   plugins: [],
 }

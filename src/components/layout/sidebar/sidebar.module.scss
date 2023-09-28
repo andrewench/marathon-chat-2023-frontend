@@ -1,0 +1,54 @@
+.box {
+  @apply min-w-[262px] w-[262px] bg-marathon-black border-r-[1px] border-r-[#32343f] px-6 py-9;
+}
+
+.stickyBox {
+  @apply sticky top-10 z-[100] bg-marathon-black pb-5;
+}
+
+.toggle {
+  @apply text-white;
+}
+
+.avatarBox {
+  @apply relative mt-10;
+}
+
+.avatarBorders {
+  @apply absolute left-[calc(50%-83px)] top-[calc(50%-90px)];
+
+  & > svg[data-role='hexagon-backdrop-rotate'] {
+    @apply absolute -left-1 top-0 rotate-90;
+  }
+
+  & > svg:nth-child(3) {
+    @apply absolute top-[calc(50%-64px)] left-[calc(50%-55px)] z-50;
+  }
+}
+
+.avatar {
+  @apply mx-auto relative bg-white w-[140px] h-[160px];
+
+  clip-path: url('#avatar-hexagon-mask');
+  transform: translateZ(0);
+
+  & > img {
+    @apply object-cover;
+  }
+}
+
+.divider {
+  @apply h-[2px] my-5 w-[90%] mx-auto bg-[#1d1e2b];
+}
+
+.username {
+  @apply text-white text-center text-xl font-medium;
+}
+
+.specialty {
+  @apply text-[#B3B3BD] text-[0.75rem] text-center;
+}
+
+.menu {
+  @apply mt-5;
+}
