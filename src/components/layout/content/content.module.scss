@@ -1,3 +1,23 @@
 .box {
-  @apply bg-red-400 w-full bg-marathon-black;
+  @apply w-full bg-marathon-black;
+}
+
+.content {
+  @apply h-[calc(100vh-140px+40px)] -mt-10;
+}
+
+.lessonBox {
+  @apply pl-5 w-8/12;
+}
+
+.player {
+  @apply relative;
+
+  & > img {
+    @apply block;
+  }
+}
+
+.skype {
+  @apply rounded-[20px];
 }

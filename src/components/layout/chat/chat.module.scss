@@ -1,0 +1,32 @@
+.box {
+  @apply max-w-[400px] w-4/12 pr-5 pb-5 static top-0;
+}
+
+.innerBox {
+  @apply h-full rounded-[20px];
+  box-shadow: 0 -1px 1px #080b1d90;
+}
+
+.chatBox {
+  @apply relative bg-[#080b1d50] backdrop-blur-lg h-full rounded-[20px] p-5 overflow-hidden;
+
+  border-width: 1px;
+  border-top: 0;
+  border-bottom: 0;
+  border-style: solid;
+  border-image: linear-gradient(to bottom, transparent, #272a4f, transparent) 0
+    1;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    border-width: 1px;
+    border-bottom: 0;
+    border-style: solid;
+    border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1
+      0;
+  }
+}
