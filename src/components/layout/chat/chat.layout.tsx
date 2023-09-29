@@ -4,7 +4,7 @@ import SimpleBar from 'simplebar-react'
 
 import cn from 'clsx'
 
-import { Flex, ScrollBox } from '@/components/layout'
+import { Flex } from '@/components/layout'
 
 import { MessageItem, StyledButton } from '@/components/ui'
 
@@ -48,6 +48,10 @@ export const Chat: FC = () => {
                 <MessageItem>
                   We have lake-front vaction rentals. No specific liability.
                 </MessageItem>
+
+                <div className={styles.myMessage}>
+                  We have lake-front vaction rentals. No specific liability.
+                </div>
               </div>
             </SimpleBar>
           </div>

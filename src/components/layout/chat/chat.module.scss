@@ -36,11 +36,21 @@
 }
 
 .tab {
-  @apply w-1/2 text-sm rounded-[15px];
+  @apply py-[10px] w-1/2 text-sm rounded-[15px];
 }
 
 .chat {
   @apply w-[360px] h-[calc(100vh-100px-50px-40px-80px)] text-white;
+}
+
+.chatList {
+  @apply py-7;
+}
+
+.myMessage {
+  @apply text-sm rounded-[10px] p-3 w-[70%] ml-auto mr-5;
+
+  background: linear-gradient(90deg, #c731ef, #fe5f0c);
 }
 
 .scrollBar {

@@ -17,7 +17,10 @@ export const MessageItem: FC<{ children: string }> = ({ children }) => {
         draggable={false}
       />
 
-      <p className={styles.message}>{children}</p>
+      <div className={styles.message}>
+        <p className={styles.text}>{children}</p>
+        <span className={styles.timestamp}>10h ago</span>
+      </div>
     </Flex>
   )
 }

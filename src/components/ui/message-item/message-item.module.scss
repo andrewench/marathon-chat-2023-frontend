@@ -1,7 +1,15 @@
 .box {
-  @apply w-full py-5 px-5 mb-5 last:mb-0 gap-3;
+  @apply w-full px-5 mb-7 last:mb-0 gap-3;
 }
 
 .message {
-  @apply bg-marathon-black text-white text-sm w-full px-5 py-3 rounded-[10px] leading-5;
+  @apply bg-marathon-black w-full px-5 py-3 rounded-[10px];
+}
+
+.text {
+  @apply text-white text-sm leading-5;
+}
+
+.timestamp {
+  @apply text-[#414857] text-xs;
 }
