@@ -21,7 +21,7 @@ interface IFlex {
 
 export const Flex: FC<PropsWithClassNameAndChildren<IFlex>> = ({
   direction = 'row',
-  align = 'stretch',
+  align = 'start',
   content = 'start',
   reversed,
   children,

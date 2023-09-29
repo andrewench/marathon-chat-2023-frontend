@@ -1,0 +1,7 @@
+.box {
+  @apply w-full py-5 px-5 mb-5 last:mb-0 gap-3;
+}
+
+.message {
+  @apply bg-marathon-black text-white text-sm w-full px-5 py-3 rounded-[10px] leading-5;
+}

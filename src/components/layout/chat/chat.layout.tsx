@@ -1,11 +1,12 @@
 import { Paperclip, Send, Smile } from 'lucide-react'
 import { FC } from 'react'
+import SimpleBar from 'simplebar-react'
 
 import cn from 'clsx'
 
-import { Flex } from '@/components/layout'
+import { Flex, ScrollBox } from '@/components/layout'
 
-import { StyledButton } from '@/components/ui'
+import { MessageItem, StyledButton } from '@/components/ui'
 
 import styles from './chat.module.scss'
 
@@ -13,7 +14,7 @@ export const Chat: FC = () => {
   return (
     <Flex direction="column" className={styles.box}>
       <div className={styles.innerBox}>
-        <div className={styles.chatBox}>
+        <Flex direction="column" className={styles.chatBox}>
           <Flex className={styles.tabs}>
             <StyledButton variant="filled" className={styles.tab}>
               Message
@@ -22,7 +23,35 @@ export const Chat: FC = () => {
               Participants
             </StyledButton>
           </Flex>
-        </div>
+
+          <div className={styles.chat}>
+            <SimpleBar className={styles.scrollBar}>
+              <div className={styles.chatList}>
+                <MessageItem>Hello. How are you?</MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+                <MessageItem>Hello. How are you?</MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+                <MessageItem>Hello. How are you?</MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+                <MessageItem>
+                  We have lake-front vaction rentals. No specific liability.
+                </MessageItem>
+              </div>
+            </SimpleBar>
+          </div>
+        </Flex>
       </div>
 
       <Flex align="center" className={styles.inputBox}>
