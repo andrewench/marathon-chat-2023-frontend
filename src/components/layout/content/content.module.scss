@@ -1,5 +1,17 @@
 .box {
-  @apply w-full bg-marathon-black;
+  @apply w-full bg-marathon-black overflow-y-auto scroll-smooth;
+
+  &::-webkit-scrollbar {
+    @apply w-1 h-1 bg-transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    @apply rounded-[2px];
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#232323];
+  }
 }
 
 .content {
@@ -7,7 +19,7 @@
 }
 
 .lessonBox {
-  @apply w-8/12;
+  @apply w-8/12 px-5;
 }
 
 .player {
@@ -20,4 +32,40 @@
 
 .skype {
   @apply rounded-[20px];
+}
+
+.articleTitleBox {
+  @apply mt-10;
+}
+
+.articleTitle {
+  @apply text-white text-2xl font-medium;
+}
+
+.share {
+  @apply flex items-center gap-x-[6px] text-white text-sm;
+}
+
+.shareIcon {
+  stroke: url('#styled-gradient');
+}
+
+.subHeading {
+  @apply mt-3 text-sm text-white;
+
+  & > .description {
+    @apply text-[#b0b0ba];
+  }
+}
+
+.heading {
+  @apply mb-3;
+}
+
+.divider {
+  @apply w-full border-[1px] border-[#232340] border-dashed my-10;
+}
+
+.description {
+  @apply text-[#a4a4ae] mb-3;
 }

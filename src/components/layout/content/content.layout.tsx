@@ -1,8 +1,11 @@
 import Image from 'next/image'
 
+import { Share2 } from 'lucide-react'
 import { FC } from 'react'
 
 import { Chat, Flex, Header } from '@/components/layout'
+
+import { Heading } from '@/components/shared'
 
 import styles from './content.module.scss'
 
@@ -23,6 +26,56 @@ export const Content: FC = () => {
               className={styles.skype}
             />
           </div>
+
+          <Flex
+            align="center"
+            content="space-between"
+            className={styles.articleTitleBox}
+          >
+            <Heading as="h1" className={styles.articleTitle}>
+              The Bussiness of Illustration and Lettering
+            </Heading>
+
+            <button className={styles.share}>
+              <svg width="0" height="0">
+                <linearGradient
+                  id="styled-gradient"
+                  x1="100%"
+                  y1="100%"
+                  x2="0%"
+                  y2="0%"
+                >
+                  <stop stopColor="#c731ef" offset="0%" />
+                  <stop stopColor="#fe5f0c" offset="100%" />
+                </linearGradient>
+              </svg>
+              <Share2 size={20} strokeWidth={2} className={styles.shareIcon} />
+              Share
+            </button>
+          </Flex>
+
+          <h3 className={styles.subHeading}>
+            <span className={styles.description}>Chapter 5</span> - Basic letter
+            drawing
+          </h3>
+
+          <div className={styles.divider} />
+
+          <Heading as="h3" variant="styled" className={styles.heading}>
+            Overview
+          </Heading>
+
+          <p className={styles.description}>
+            Nurture yourself while you practice your drawing skills with two
+            distinct and meditative techniques. One-line drawing in trendy, but
+            it is way to break down hapes two distinct and meditative
+            techniques. One-line while you practice your drawing skills with
+            two... <span>More</span>
+          </p>
+
+          <Heading as="h4" variant="styled" className={styles.heading}>
+            Chapter topics
+          </Heading>
         </div>
 
         <Chat />

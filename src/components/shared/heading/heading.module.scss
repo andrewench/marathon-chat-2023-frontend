@@ -1,0 +1,8 @@
+.styled {
+  @apply inline-block;
+
+  background: linear-gradient(to right, #c731ef, #fe5f0c);
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
