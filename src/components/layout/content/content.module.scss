@@ -3,11 +3,11 @@
 }
 
 .content {
-  @apply h-[calc(100vh-140px+40px)] -mt-10;
+  @apply h-[calc(100vh-140px+40px)] -mt-10 px-5;
 }
 
 .lessonBox {
-  @apply pl-5 w-8/12;
+  @apply w-8/12;
 }
 
 .player {

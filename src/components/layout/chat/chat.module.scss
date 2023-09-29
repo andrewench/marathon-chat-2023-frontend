@@ -1,5 +1,5 @@
 .box {
-  @apply max-w-[400px] w-4/12 pr-5 pb-5 static top-0;
+  @apply w-[360px] pb-5 static top-0 gap-y-5 flex-shrink-0;
 }
 
 .innerBox {
@@ -8,7 +8,7 @@
 }
 
 .chatBox {
-  @apply relative bg-[#080b1d50] backdrop-blur-lg h-full rounded-[20px] p-5 overflow-hidden;
+  @apply relative h-full bg-[#080b1d50] backdrop-blur-lg rounded-[20px] p-5 overflow-hidden;
 
   border-width: 1px;
   border-top: 0;
@@ -29,4 +29,42 @@
     border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1
       0;
   }
+}
+
+.tabs {
+  @apply gap-3;
+}
+
+.tab {
+  @apply w-1/2 text-sm rounded-[15px];
+}
+
+.inputBox {
+  @apply h-[60px] flex-shrink-0 bg-[#090b1f] rounded-[15px] border-[1px] border-solid px-4;
+
+  border-left: 0;
+  border-right: 0;
+  border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1 1;
+}
+
+.button {
+  @apply text-white;
+
+  &.emodjiButton {
+    @apply mr-2;
+  }
+}
+
+.input {
+  @apply w-full px-3 focus:outline-none text-white text-sm bg-transparent;
+
+  height: inherit;
+}
+
+.submit {
+  @apply rounded-[20px];
+}
+
+.submitIcon {
+  @apply pr-[2px];
 }

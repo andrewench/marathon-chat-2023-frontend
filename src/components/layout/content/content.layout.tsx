@@ -11,13 +11,13 @@ export const Content: FC = () => {
     <div className={styles.box}>
       <Header />
 
-      <Flex className={styles.content}>
+      <Flex content="space-between" className={styles.content}>
         <div className={styles.lessonBox}>
           <div className={styles.player}>
             <Image
               src="/skype.jpg"
               alt="Skype"
-              width={700}
+              width={640}
               height={667}
               draggable={false}
               className={styles.skype}

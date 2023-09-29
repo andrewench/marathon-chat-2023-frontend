@@ -1,0 +1,12 @@
+.button {
+  @apply p-2 text-white;
+
+  &.filled {
+    background: linear-gradient(90deg, #c731ef, #fe5f0c);
+  }
+
+  &.outline {
+    @apply border-[1px] border-[#b3b3b3];
+    box-shadow: inset 0 0 2px #00000090;
+  }
+}
