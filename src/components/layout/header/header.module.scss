@@ -1,5 +1,5 @@
 .box {
-  @apply h-[140px] w-full pt-7 px-5;
+  @apply h-[140px] w-full pt-7 px-5 bg-fixed;
 
   background: linear-gradient(45deg, #2b798f, #8a4ba9, #d2ae51, #c94a4e);
 }

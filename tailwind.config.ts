@@ -6,6 +6,7 @@ const config: Config = {
     extend: {
       colors: {
         'marathon-black': '#00010d',
+        'marathon-red': '#e51515',
       },
     },
   },

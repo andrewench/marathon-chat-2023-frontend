@@ -5,6 +5,8 @@ import { Chat, Flex, Header, VideoPlayer } from '@/components/layout'
 
 import { Heading } from '@/components/shared'
 
+import { StyledGradientMaskIcon } from '@/components/icons'
+
 import styles from './content.module.scss'
 
 export const Content: FC = () => {
@@ -22,18 +24,7 @@ export const Content: FC = () => {
             </Heading>
 
             <button className={styles.share}>
-              <svg width="0" height="0">
-                <linearGradient
-                  id="styled-gradient"
-                  x1="100%"
-                  y1="100%"
-                  x2="0%"
-                  y2="0%"
-                >
-                  <stop stopColor="#fe5f0c" offset="0%" />
-                  <stop stopColor="#c731ef" offset="100%" />
-                </linearGradient>
-              </svg>
+              <StyledGradientMaskIcon id="styled-gradient" />
               <Share2 size={20} strokeWidth={1} className={styles.shareIcon} />
               Share
             </button>

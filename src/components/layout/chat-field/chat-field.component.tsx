@@ -1,6 +1,6 @@
 import EmojiPicker from 'emoji-picker-react'
-import { Paperclip, Send, Smile } from 'lucide-react'
-import { FC, memo, useState } from 'react'
+import { Paperclip, Send, SmilePlus } from 'lucide-react'
+import { ChangeEvent, FC, memo, useState } from 'react'
 
 import cn from 'clsx'
 
@@ -12,6 +12,7 @@ import styles from './chat-field.module.scss'
 
 export const ChatField: FC = memo(function ChatField() {
   const [isPickerOpen, setPickerOpen] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
 
   const togglePicker = () => {
     isPickerOpen ? setPickerOpen(false) : setPickerOpen(true)
@@ -23,8 +24,11 @@ export const ChatField: FC = memo(function ChatField() {
         <div className={styles.picker}>
           <EmojiPicker
             width={360}
-            height={360}
+            height={300}
             lazyLoadEmojis
+            onEmojiClick={emoji => {
+              setMessage(message => (message += emoji.emoji))
+            }}
             previewConfig={{ showPreview: false }}
           />
         </div>
@@ -32,16 +36,29 @@ export const ChatField: FC = memo(function ChatField() {
 
       <button
         onClick={togglePicker}
-        className={cn(styles.button, styles.emodjiButton)}
+        className={cn(
+          styles.button,
+          {
+            [styles.styled]: isPickerOpen,
+          },
+          styles.emodjiButton,
+        )}
       >
-        <Smile size={20} strokeWidth={2} />
+        <SmilePlus size={20} strokeWidth={2} />
       </button>
 
       <button className={styles.button}>
         <Paperclip size={20} strokeWidth={2} />
       </button>
 
-      <input placeholder="Enter something..." className={styles.input} />
+      <input
+        value={message}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setMessage(event.target.value)
+        }}
+        placeholder="Enter something..."
+        className={styles.input}
+      />
 
       <StyledButton variant="filled" className={styles.submit}>
         <Send size={18} strokeWidth={2} className={styles.submitIcon} />

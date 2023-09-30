@@ -14,7 +14,7 @@
   border-top: 0;
   border-bottom: 0;
   border-style: solid;
-  border-image: linear-gradient(to bottom, transparent, #272a4f, transparent) 0
+  border-image: linear-gradient(to bottom, transparent, #373a61, transparent) 0
     1;
 
   &::after {
@@ -26,7 +26,7 @@
     border-width: 1px;
     border-bottom: 0;
     border-style: solid;
-    border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1
+    border-image: linear-gradient(to right, transparent, #373a61, transparent) 1
       0;
   }
 }

@@ -3,15 +3,19 @@
 
   border-left: 0;
   border-right: 0;
-  border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1 1;
+  border-image: linear-gradient(to right, transparent, #373a61, transparent) 1 1;
 }
 
 .picker {
-  @apply absolute left-[1px] bottom-[100%] w-full;
+  @apply absolute left-[1px] bottom-[calc(100%+20px)] w-full;
 }
 
 .button {
-  @apply text-white;
+  @apply text-white hover:text-red-400 transition-colors duration-150;
+
+  &.styled {
+    @apply text-red-400;
+  }
 
   &.emodjiButton {
     @apply mr-2;
