@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.6",
     "clsx": "^2.0.0",
+    "emoji-picker-react": "^4.5.2",
     "framer-motion": "^10.16.4",
     "lucide-react": "^0.279.0",
     "next": "latest",

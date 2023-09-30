@@ -1,0 +1,33 @@
+.inputBox {
+  @apply relative h-[60px] w-full flex-shrink-0 bg-[#090b1f] rounded-[15px] border-[1px] border-solid px-4;
+
+  border-left: 0;
+  border-right: 0;
+  border-image: linear-gradient(to right, transparent, #272a4f, transparent) 1 1;
+}
+
+.picker {
+  @apply absolute left-[1px] bottom-[100%] w-full;
+}
+
+.button {
+  @apply text-white;
+
+  &.emodjiButton {
+    @apply mr-2;
+  }
+}
+
+.input {
+  @apply w-full px-3 focus:outline-none text-white text-sm bg-transparent;
+
+  height: inherit;
+}
+
+.submit {
+  @apply rounded-[20px];
+}
+
+.submitIcon {
+  @apply pr-[2px];
+}

@@ -2,11 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-body,
-.scroll-bar {
-  @apply scroll-smooth;
-
+body {
   -webkit-font-smoothing: antialiased;
+}
+
+body,
+.scroll-bar,
+.EmojiPickerReact .epr-body::-webkit-scrollbar {
+  @apply scroll-smooth;
+}
+
+body .EmojiPickerReact {
+  --epr-bg-color: #12131c;
+  --epr-category-label-bg-color: #12131c;
+  --epr-preview-border-color: transparent;
+  --epr-picker-border-color: transparent;
+  --epr-emoji-size: 20px;
+  --epr-picker-border-radius: 20px;
+  --epr-search-input-border-radius: 10px;
+  --epr-search-input-bg-color: #1a1b27;
+}
+
+.EmojiPickerReact .epr-emoji-category-label {
+  @apply text-sm;
+}
+
+.scroll-bar::-webkit-scrollbar,
+.EmojiPickerReact .epr-body::-webkit-scrollbar {
+  @apply w-1 h-1 bg-transparent;
+}
+
+.scroll-bar::-webkit-scrollbar-thumb,
+.EmojiPickerReact .epr-body::-webkit-scrollbar-thumb {
+  @apply rounded-[2px];
+}
+
+.scroll-bar::-webkit-scrollbar-thumb:hover,
+.EmojiPickerReact .epr-body::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#232323];
 }
 
 .simplebar-content-wrapper:focus {
