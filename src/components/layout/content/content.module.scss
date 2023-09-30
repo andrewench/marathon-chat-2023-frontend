@@ -19,23 +19,7 @@
 }
 
 .lessonBox {
-  @apply w-8/12 px-5;
-}
-
-.player {
-  @apply relative;
-
-  & > img {
-    @apply block;
-  }
-}
-
-.skype {
-  @apply rounded-[20px];
-}
-
-.articleTitleBox {
-  @apply mt-10;
+  @apply pr-5;
 }
 
 .articleTitle {
@@ -67,5 +51,5 @@
 }
 
 .description {
-  @apply text-[#a4a4ae] mb-3;
+  @apply text-[#a4a4ae] mb-7;
 }

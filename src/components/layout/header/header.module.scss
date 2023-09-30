@@ -2,6 +2,10 @@
   @apply h-[140px] w-full bg-[#9a30ab] pt-7 px-5;
 }
 
+.left {
+  @apply w-full mr-5;
+}
+
 .links {
   @apply gap-7;
 }
@@ -19,7 +23,7 @@
 }
 
 .searchBar {
-  @apply w-[360px] rounded-[15px] border-[1px] border-marathon-black py-3 px-5 bg-marathon-black/20 text-white focus:outline-none;
+  @apply w-[360px] flex-shrink-0 rounded-[15px] border-[1px] border-marathon-black py-3 px-5 bg-marathon-black/20 text-white focus:outline-none;
 
   &::placeholder {
     @apply text-white;

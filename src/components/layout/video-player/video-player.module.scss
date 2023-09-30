@@ -1,0 +1,19 @@
+.player {
+  @apply relative w-full;
+
+  & > img {
+    @apply block;
+  }
+}
+
+.skype {
+  @apply rounded-[20px] mx-auto;
+}
+
+.controls {
+  @apply gap-5 w-[420px] h-[100px] mx-auto -translate-y-[55%] rounded-[20px] backdrop-blur-xl bg-[#080a1960];
+
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(to right, transparent, #363967, transparent) 1 0;
+}

@@ -1,9 +1,7 @@
-import Image from 'next/image'
-
 import { Share2 } from 'lucide-react'
 import { FC } from 'react'
 
-import { Chat, Flex, Header } from '@/components/layout'
+import { Chat, Flex, Header, VideoPlayer } from '@/components/layout'
 
 import { Heading } from '@/components/shared'
 
@@ -16,22 +14,9 @@ export const Content: FC = () => {
 
       <Flex content="space-between" className={styles.content}>
         <div className={styles.lessonBox}>
-          <div className={styles.player}>
-            <Image
-              src="/skype.jpg"
-              alt="Skype"
-              width={640}
-              height={667}
-              draggable={false}
-              className={styles.skype}
-            />
-          </div>
+          <VideoPlayer />
 
-          <Flex
-            align="center"
-            content="space-between"
-            className={styles.articleTitleBox}
-          >
+          <Flex align="center" content="space-between">
             <Heading as="h1" className={styles.articleTitle}>
               The Bussiness of Illustration and Lettering
             </Heading>
@@ -45,11 +30,11 @@ export const Content: FC = () => {
                   x2="0%"
                   y2="0%"
                 >
-                  <stop stopColor="#c731ef" offset="0%" />
-                  <stop stopColor="#fe5f0c" offset="100%" />
+                  <stop stopColor="#fe5f0c" offset="0%" />
+                  <stop stopColor="#c731ef" offset="100%" />
                 </linearGradient>
               </svg>
-              <Share2 size={20} strokeWidth={2} className={styles.shareIcon} />
+              <Share2 size={20} strokeWidth={1} className={styles.shareIcon} />
               Share
             </button>
           </Flex>

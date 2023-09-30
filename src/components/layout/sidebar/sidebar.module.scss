@@ -23,7 +23,7 @@
 }
 
 .toggle {
-  @apply text-white;
+  @apply text-white focus:outline-none;
 }
 
 .avatarBox {

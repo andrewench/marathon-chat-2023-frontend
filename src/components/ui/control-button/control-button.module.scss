@@ -1,0 +1,11 @@
+.button {
+  @apply rounded-full text-white flex-shrink-0;
+
+  &.primary {
+    @apply bg-[#e51515] p-4;
+  }
+
+  &.secondary {
+    @apply p-3 bg-marathon-black;
+  }
+}
