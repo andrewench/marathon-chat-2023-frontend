@@ -48,7 +48,7 @@
 }
 
 .myMessage {
-  @apply text-sm rounded-[10px] p-3 w-[70%] ml-auto mr-5;
+  @apply text-sm rounded-[10px] py-3 px-5 w-[70%] ml-auto mr-5;
 
   background: linear-gradient(90deg, #c731ef, #fe5f0c);
 }

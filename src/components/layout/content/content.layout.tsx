@@ -63,7 +63,9 @@ export const Content: FC = () => {
           </Heading>
         </div>
 
-        <Chat />
+        <div className={styles.chatBox}>
+          <Chat />
+        </div>
       </Flex>
     </div>
   )

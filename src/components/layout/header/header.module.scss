@@ -1,5 +1,7 @@
 .box {
-  @apply h-[140px] w-full bg-[#9a30ab] pt-7 px-5;
+  @apply h-[140px] w-full pt-7 px-5;
+
+  background: linear-gradient(45deg, #2b798f, #8a4ba9, #d2ae51, #c94a4e);
 }
 
 .left {
@@ -22,8 +24,16 @@
   @apply flex gap-2 items-center text-white bg-marathon-black text-sm rounded-[15px] py-3 px-5;
 }
 
+.searchBarBox {
+  @apply w-[360px] flex-shrink-0 rounded-[15px] border-[1px] border-marathon-black bg-marathon-black/20;
+}
+
+.searchIcon {
+  @apply mx-3 text-white;
+}
+
 .searchBar {
-  @apply w-[360px] flex-shrink-0 rounded-[15px] border-[1px] border-marathon-black py-3 px-5 bg-marathon-black/20 text-white focus:outline-none;
+  @apply bg-transparent pr-5 w-full py-3 text-white focus:outline-none;
 
   &::placeholder {
     @apply text-white;

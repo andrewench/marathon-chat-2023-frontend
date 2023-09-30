@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Plus, UserX, Users2 } from 'lucide-react'
+import { Plus, Search, UserX, Users2 } from 'lucide-react'
 import { FC } from 'react'
 
 import { Flex } from '@/components/layout'
@@ -16,13 +16,13 @@ export const Header: FC = () => {
         <Flex align="center" content="space-between" className={styles.left}>
           <Flex align="center" className={styles.links}>
             <Flex align="center" className={styles.inviteGroup}>
-              <Users2 size={24} strokeWidth={1} />
+              <Users2 size={24} strokeWidth={2} />
               <Link href="/">Invited to the class</Link>
               <Counter value={52} />
             </Flex>
 
             <Flex align="center" className={styles.absentPeople}>
-              <UserX size={24} strokeWidth={1} />
+              <UserX size={22} strokeWidth={2} />
               <Link href="/">Absent people</Link>
               <Counter value={52} />
             </Flex>
@@ -34,7 +34,10 @@ export const Header: FC = () => {
           </button>
         </Flex>
 
-        <input placeholder="Search..." className={styles.searchBar} />
+        <Flex align="center" className={styles.searchBarBox}>
+          <Search size={24} strokeWidth={2} className={styles.searchIcon} />
+          <input placeholder="Search..." className={styles.searchBar} />
+        </Flex>
       </Flex>
     </header>
   )
