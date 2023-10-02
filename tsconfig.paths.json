@@ -1,8 +1,7 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "app",
     "paths": {
-      "@/components/screens": ["components/screens"],
       "@/components/providers": ["components/providers"],
       "@/components/layout": ["components/layout"],
       "@/components/ui": ["components/ui"],

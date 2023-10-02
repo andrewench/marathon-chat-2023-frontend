@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { AlignRight } from 'lucide-react'
 import { FC, useRef } from 'react'
 
+import { app } from '../../../store/slices'
 import cn from 'clsx'
 import { animate, motion } from 'framer-motion'
 
@@ -17,8 +18,6 @@ import {
 } from '@/components/icons'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
-
-import { app } from '@/store/slices'
 
 import styles from './sidebar.module.scss'
 

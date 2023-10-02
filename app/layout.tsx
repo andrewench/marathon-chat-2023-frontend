@@ -13,7 +13,6 @@ const roboto = Roboto({
 
 export const metadata: Metadata = {
   title: 'Marathon Chat by andrewench',
-  description: 'Marathon Chat by andrewench',
 }
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => {
