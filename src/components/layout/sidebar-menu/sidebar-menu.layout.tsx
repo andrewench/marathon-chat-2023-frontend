@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { memo } from 'react'
 
 import cn from 'clsx'
 
@@ -10,7 +10,9 @@ import { SideBarMenuList } from './sidebar-menu.data'
 
 import styles from './sidebar-menu.module.scss'
 
-export const SideBarMenu: FC<PropsWithClassName> = ({ className }) => {
+export const SideBarMenu = memo(function SideBarMenu({
+  className,
+}: PropsWithClassName) {
   return (
     <ul className={cn(styles.list, className)}>
       {SideBarMenuList.map((item, idx) => (
@@ -18,4 +20,4 @@ export const SideBarMenu: FC<PropsWithClassName> = ({ className }) => {
       ))}
     </ul>
   )
-}
+})
