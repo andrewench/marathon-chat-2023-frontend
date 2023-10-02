@@ -21,11 +21,11 @@
 }
 
 .addPeople {
-  @apply flex gap-2 items-center text-white bg-marathon-black text-sm rounded-[15px] py-3 px-5;
+  @apply flex gap-2 items-center text-white bg-marathon-black text-sm rounded-marathon-15 py-3 px-5;
 }
 
 .searchBarBox {
-  @apply w-[360px] flex-shrink-0 rounded-[15px] border-[1px] border-marathon-black bg-marathon-black/20;
+  @apply w-[360px] flex-shrink-0 rounded-marathon-15 border-[1px] border-marathon-black bg-marathon-black/20;
 }
 
 .searchIcon {

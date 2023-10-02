@@ -8,6 +8,11 @@ const config: Config = {
         'marathon-black': '#00010d',
         'marathon-red': '#e51515',
       },
+      borderRadius: {
+        'marathon-10': '10px',
+        'marathon-15': '15px',
+        'marathon-20': '20px',
+      },
     },
   },
   plugins: [],

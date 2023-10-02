@@ -3,12 +3,12 @@
 }
 
 .innerBox {
-  @apply h-full rounded-[20px];
+  @apply h-full rounded-marathon-20;
   box-shadow: 0 -1px 1px #080b1d90;
 }
 
 .chatBox {
-  @apply relative h-full bg-[#070819af] backdrop-blur-lg rounded-[20px] overflow-hidden;
+  @apply relative h-full bg-[#070819af] backdrop-blur-lg rounded-marathon-20 overflow-hidden;
 
   border-width: 1px;
   border-top: 0;
@@ -36,7 +36,7 @@
 }
 
 .tab {
-  @apply py-[10px] w-1/2 text-sm rounded-[15px];
+  @apply py-[10px] w-1/2 text-sm rounded-marathon-15;
 }
 
 .chat {
@@ -48,7 +48,7 @@
 }
 
 .myMessage {
-  @apply text-sm rounded-[10px] py-3 px-5 w-[70%] ml-auto mr-5;
+  @apply text-sm rounded-marathon-10 py-3 px-5 w-[70%] ml-auto mr-5;
 
   background: linear-gradient(90deg, #c731ef, #fe5f0c);
 }

@@ -1,5 +1,5 @@
 .inputBox {
-  @apply relative h-[60px] w-full flex-shrink-0 bg-[#090b1f] rounded-[15px] border-[1px] border-solid px-4;
+  @apply relative h-[60px] w-full flex-shrink-0 bg-[#090b1f] rounded-marathon-15 border-[1px] border-solid px-4;
 
   border-left: 0;
   border-right: 0;
@@ -29,7 +29,7 @@
 }
 
 .submit {
-  @apply rounded-[20px];
+  @apply rounded-marathon-20;
 }
 
 .submitIcon {

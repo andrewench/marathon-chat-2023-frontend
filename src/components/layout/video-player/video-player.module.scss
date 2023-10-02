@@ -7,11 +7,11 @@
 }
 
 .skype {
-  @apply rounded-[20px] mx-auto;
+  @apply rounded-marathon-20 mx-auto;
 }
 
 .controls {
-  @apply gap-5 w-[420px] h-[100px] mx-auto -translate-y-[55%] rounded-[20px] backdrop-blur-xl bg-[#080a1960];
+  @apply gap-5 w-[420px] h-[100px] mx-auto -translate-y-[55%] rounded-marathon-20 backdrop-blur-xl bg-[#080a1960];
 
   border-width: 1px;
   border-style: solid;
