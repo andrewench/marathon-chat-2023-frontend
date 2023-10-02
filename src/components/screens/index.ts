@@ -1,1 +1,1 @@
-export { Lesson } from './lesson.screen'
+export {}
