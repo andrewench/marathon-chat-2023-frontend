@@ -15,11 +15,17 @@ import { Flex } from '@/components/layout'
 
 import { ControlButton } from '@/components/ui'
 
+import { useAppSelector } from '@/shared/hooks'
+
+import { app } from '@/store/slices'
+
 import styles from './video-player.module.scss'
 
 export const VideoPlayer: FC = () => {
   const [isFullScreen, setFullScreen] = useState<boolean>(false)
   const [isMicroMuted, setMicroMuted] = useState<boolean>(true)
+
+  const { sideBar } = useAppSelector(app)
 
   const playerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -95,6 +101,7 @@ export const VideoPlayer: FC = () => {
         content="center"
         className={cn(styles.controls, {
           [styles.fullScreen]: isFullScreen,
+          [styles.offset]: sideBar.isOpen,
         })}
       >
         <ControlButton

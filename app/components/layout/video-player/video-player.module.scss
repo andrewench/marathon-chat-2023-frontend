@@ -78,10 +78,16 @@
 }
 
 .controls {
-  @apply relative gap-5 w-[420px] h-[80px] mx-auto rounded-marathon-20 backdrop-blur-xl bg-[#080a1960] z-[150];
+  @apply relative gap-5 w-[420px] h-[80px] mx-auto rounded-marathon-20 backdrop-blur-xl bg-[#080a1960] z-[150] transition-transform duration-300;
 
   &:not(.fullScreen) {
-    @apply -translate-y-[80%];
+    &:not(.offset) {
+      @apply -translate-y-[80%];
+    }
+
+    &.offset {
+      @apply -translate-y-[55%];
+    }
   }
 
   &.fullScreen {
