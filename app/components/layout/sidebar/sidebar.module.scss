@@ -4,7 +4,7 @@
 
 .innerBox {
   &:not(.minimized) {
-    @apply px-6 py-9;
+    @apply py-9;
   }
 
   &.minimized {
@@ -13,6 +13,10 @@
 }
 
 .stickyBox {
+  &:not(.minimized) {
+    @apply px-6;
+  }
+
   @apply sticky top-10 z-[100] bg-marathon-black pb-5;
 }
 
@@ -81,6 +85,10 @@
 
 .menu {
   &:not(.minimized) {
-    @apply mt-5;
+    @apply mt-5 px-6;
+  }
+
+  &.minimized {
+    @apply py-2;
   }
 }

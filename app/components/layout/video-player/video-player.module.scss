@@ -38,7 +38,7 @@
 }
 
 .videoWrap {
-  @apply relative;
+  @apply relative hover:cursor-pointer;
 
   &:not(.fullScreen) {
     @apply after:rounded-marathon-20;

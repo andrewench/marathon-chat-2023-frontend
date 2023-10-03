@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { AlignRight } from 'lucide-react'
 import { FC, useRef } from 'react'
 
-import { app } from '../../../store/slices'
 import cn from 'clsx'
 import { animate, motion } from 'framer-motion'
 
@@ -11,13 +10,9 @@ import { Flex, ScrollBox, SideBarMenu } from '@/components/layout'
 
 import { Avatar } from '@/components/shared'
 
-import {
-  HexagonBackdropIcon,
-  HexagonMaskIcon,
-  HexagonOutlineIcon,
-} from '@/components/icons'
-
 import { useActions, useAppSelector } from '@/shared/hooks'
+
+import { app } from '@/store/slices'
 
 import styles from './sidebar.module.scss'
 
@@ -70,7 +65,11 @@ export const SideBar: FC = () => {
             [styles.minimized]: !sideBar.isOpen,
           })}
         >
-          <div className={styles.stickyBox}>
+          <div
+            className={cn(styles.stickyBox, {
+              [styles.minimized]: !sideBar.isOpen,
+            })}
+          >
             <Flex
               align="center"
               content="space-between"

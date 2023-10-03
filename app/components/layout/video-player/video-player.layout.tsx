@@ -68,6 +68,11 @@ export const VideoPlayer: FC = () => {
       </Flex>
 
       <div
+        onClick={() => {
+          if (!videoRef.current) return
+
+          videoRef.current.play()
+        }}
         className={cn(styles.videoWrap, {
           [styles.fullScreen]: isFullScreen,
         })}
