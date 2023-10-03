@@ -49,9 +49,29 @@ export const Content: FC = () => {
             two... <span>More</span>
           </p>
 
-          <Heading as="h4" variant="styled" className={styles.heading}>
-            Chapter topics
+          <Heading as="h3" variant="styled" className={styles.heading}>
+            Overview
           </Heading>
+
+          <p className={styles.description}>
+            Nurture yourself while you practice your drawing skills with two
+            distinct and meditative techniques. One-line drawing in trendy, but
+            it is way to break down hapes two distinct and meditative
+            techniques. One-line while you practice your drawing skills with
+            two... <span>More</span>
+          </p>
+
+          <Heading as="h3" variant="styled" className={styles.heading}>
+            Overview
+          </Heading>
+
+          <p className={styles.description}>
+            Nurture yourself while you practice your drawing skills with two
+            distinct and meditative techniques. One-line drawing in trendy, but
+            it is way to break down hapes two distinct and meditative
+            techniques. One-line while you practice your drawing skills with
+            two... <span>More</span>
+          </p>
         </div>
 
         <div className={styles.chatBox}>

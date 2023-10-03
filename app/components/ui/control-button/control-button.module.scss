@@ -2,10 +2,10 @@
   @apply rounded-full text-white flex-shrink-0;
 
   &.primary {
-    @apply bg-marathon-red p-4;
+    @apply bg-marathon-red p-[14px];
   }
 
   &.secondary {
-    @apply p-3 bg-marathon-black;
+    @apply p-[10px] bg-marathon-black;
   }
 }

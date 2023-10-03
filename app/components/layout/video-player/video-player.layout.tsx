@@ -1,7 +1,7 @@
-import Image from 'next/image'
-
 import { Cast, Maximize, Mic, PhoneOff, Video } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
+
+import cn from 'clsx'
 
 import { Flex } from '@/components/layout'
 
@@ -10,21 +10,82 @@ import { ControlButton } from '@/components/ui'
 import styles from './video-player.module.scss'
 
 export const VideoPlayer: FC = () => {
-  return (
-    <div className={styles.player}>
-      <Image
-        src="/skype.jpg"
-        alt="Skype"
-        width={690}
-        height={667}
-        draggable={false}
-        className={styles.skype}
-      />
+  const [isFullScreen, setFullScreen] = useState<boolean>(false)
 
-      <Flex align="center" content="center" className={styles.controls}>
+  const playerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const clickHandler = () => {
+    if (!playerRef.current) return
+
+    if (isFullScreen) {
+      document.exitFullscreen()
+    } else {
+      playerRef.current.requestFullscreen()
+    }
+  }
+
+  useEffect(() => {
+    const ref = playerRef.current
+    const video = videoRef.current
+
+    if (!ref) return
+    if (!video) return
+
+    const fullScreenHandler = () => {
+      if (document.fullscreenElement) {
+        setFullScreen(true)
+      } else {
+        setFullScreen(false)
+      }
+    }
+
+    ref.addEventListener('fullscreenchange', fullScreenHandler)
+    video.oncontextmenu = () => false
+
+    return () => {
+      ref.removeEventListener('fullscreenchange', fullScreenHandler)
+    }
+  }, [])
+
+  return (
+    <div className={styles.player} ref={playerRef}>
+      <Flex align="center" className={styles.live}>
+        <div className={styles.onAirIcon} />
+
+        <p className={styles.onAir}>LIVE</p>
+        <span className={styles.divider} />
+        <p className={styles.duration}>01:23:39</p>
+      </Flex>
+
+      <div
+        className={cn(styles.videoWrap, {
+          [styles.fullScreen]: isFullScreen,
+        })}
+      >
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          className={cn(styles.video, {
+            [styles.roundedCorners]: !isFullScreen,
+          })}
+        >
+          <source src="" />
+        </video>
+      </div>
+
+      <Flex
+        align="center"
+        content="center"
+        className={cn(styles.controls, {
+          [styles.fullScreen]: isFullScreen,
+        })}
+      >
         <ControlButton
           icon={<Maximize size={18} strokeWidth={2} />}
           variant="secondary"
+          onClick={clickHandler}
         />
         <ControlButton
           icon={<Mic size={18} strokeWidth={2} />}
