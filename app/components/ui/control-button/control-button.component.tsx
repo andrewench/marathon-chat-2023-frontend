@@ -8,13 +8,18 @@ import { PropsWithClassName } from '@/shared/types'
 import styles from './control-button.module.scss'
 
 interface IControlButton {
-  icon: ReactNode
+  icon?: ReactNode
+  doubleIcons?: {
+    firstIcon?: ReactNode
+    secondIcon?: ReactNode
+  }
   variant: 'primary' | 'secondary'
   onClick?: () => void
 }
 
 export const ControlButton: FC<PropsWithClassName<IControlButton>> = ({
   icon,
+  doubleIcons,
   variant,
   onClick,
   className,
@@ -33,7 +38,11 @@ export const ControlButton: FC<PropsWithClassName<IControlButton>> = ({
         className,
       )}
     >
-      {icon}
+      {doubleIcons?.firstIcon || doubleIcons?.secondIcon ? (
+        <>{doubleIcons.firstIcon || doubleIcons.secondIcon}</>
+      ) : (
+        <>{icon}</>
+      )}
     </motion.button>
   )
 }

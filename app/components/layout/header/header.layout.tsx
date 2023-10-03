@@ -3,6 +3,8 @@ import Link from 'next/link'
 import { Plus, Search, UserX, Users2 } from 'lucide-react'
 import { FC } from 'react'
 
+import { motion } from 'framer-motion'
+
 import { Flex } from '@/components/layout'
 
 import { Counter } from '@/components/shared'
@@ -28,10 +30,14 @@ export const Header: FC = () => {
             </Flex>
           </Flex>
 
-          <button className={styles.addPeople}>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+            className={styles.addPeople}
+          >
             <Plus size={20} strokeWidth={2} />
             Add people
-          </button>
+          </motion.button>
         </Flex>
 
         <Flex align="center" className={styles.searchBarBox}>

@@ -1,4 +1,12 @@
-import { Cast, Maximize, Mic, PhoneOff, Video } from 'lucide-react'
+import {
+  Cast,
+  Maximize,
+  Mic,
+  MicOff,
+  Minimize,
+  PhoneOff,
+  Video,
+} from 'lucide-react'
 import { FC, useEffect, useRef, useState } from 'react'
 
 import cn from 'clsx'
@@ -11,6 +19,7 @@ import styles from './video-player.module.scss'
 
 export const VideoPlayer: FC = () => {
   const [isFullScreen, setFullScreen] = useState<boolean>(false)
+  const [isMicroMuted, setMicroMuted] = useState<boolean>(true)
 
   const playerRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -67,6 +76,7 @@ export const VideoPlayer: FC = () => {
           ref={videoRef}
           autoPlay
           loop
+          poster="/skype.jpg"
           className={cn(styles.video, {
             [styles.roundedCorners]: !isFullScreen,
           })}
@@ -83,13 +93,22 @@ export const VideoPlayer: FC = () => {
         })}
       >
         <ControlButton
-          icon={<Maximize size={18} strokeWidth={2} />}
+          doubleIcons={{
+            firstIcon: !isFullScreen && <Maximize size={18} strokeWidth={2} />,
+            secondIcon: isFullScreen && <Minimize size={18} strokeWidth={2} />,
+          }}
           variant="secondary"
           onClick={clickHandler}
         />
         <ControlButton
-          icon={<Mic size={18} strokeWidth={2} />}
+          doubleIcons={{
+            firstIcon: !isMicroMuted && <Mic size={18} strokeWidth={2} />,
+            secondIcon: isMicroMuted && <MicOff size={18} strokeWidth={2} />,
+          }}
           variant="secondary"
+          onClick={() => {
+            setMicroMuted(!isMicroMuted)
+          }}
         />
         <ControlButton
           icon={<PhoneOff size={24} strokeWidth={2} />}
