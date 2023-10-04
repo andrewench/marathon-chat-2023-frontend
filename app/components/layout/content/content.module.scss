@@ -1,21 +1,9 @@
 .box {
-  @apply w-full bg-marathon-black overflow-y-auto scroll-smooth;
-
-  &::-webkit-scrollbar {
-    @apply w-1 h-1 bg-transparent;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    @apply rounded-[2px];
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#232323];
-  }
+  @apply w-full bg-marathon-black;
 }
 
 .content {
-  @apply h-[calc(100vh-140px+40px)] -mt-10 px-5;
+  @apply -mt-10 px-5;
 }
 
 .lessonBox {

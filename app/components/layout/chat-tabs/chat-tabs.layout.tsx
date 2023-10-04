@@ -10,7 +10,7 @@ export const ChatTabs: FC = () => {
   const [tab, setTab] = useState<number>(0)
 
   return (
-    <Flex className={styles.tabs}>
+    <Flex align="center" className={styles.tabs}>
       <ChatTab tabIndex={0} currentTab={tab} setTab={setTab}>
         Message
       </ChatTab>

@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 body {
+  @apply bg-marathon-black;
+
   -webkit-font-smoothing: antialiased;
 }
 
@@ -28,16 +30,19 @@ body .EmojiPickerReact {
   @apply text-sm;
 }
 
+body::-webkit-scrollbar,
 .scroll-bar::-webkit-scrollbar,
 .EmojiPickerReact .epr-body::-webkit-scrollbar {
   @apply w-1 h-1 bg-transparent;
 }
 
+body::-webkit-scrollbar-thumb,
 .scroll-bar::-webkit-scrollbar-thumb,
 .EmojiPickerReact .epr-body::-webkit-scrollbar-thumb {
   @apply rounded-[2px];
 }
 
+body::-webkit-scrollbar-thumb:hover,
 .scroll-bar::-webkit-scrollbar-thumb:hover,
 .EmojiPickerReact .epr-body::-webkit-scrollbar-thumb:hover {
   @apply bg-[#232323];

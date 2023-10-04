@@ -2,6 +2,10 @@
   @apply w-full px-5 mb-7 last:mb-0 gap-3;
 }
 
+.avatar {
+  @apply w-10 h-10 min-w-[40px] min-h-[40px];
+}
+
 .message {
   @apply bg-[#01020a] w-full px-5 py-3 rounded-marathon-10;
 }

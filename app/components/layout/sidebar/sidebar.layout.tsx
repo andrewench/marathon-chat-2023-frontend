@@ -59,64 +59,66 @@ export const SideBar: FC = () => {
       initial={{ width: 262 }}
       className={styles.box}
     >
-      <ScrollBox>
-        <div
-          className={cn(styles.innerBox, {
-            [styles.minimized]: !sideBar.isOpen,
-          })}
-        >
+      <div className={styles.stickyWrap}>
+        <ScrollBox>
           <div
-            className={cn(styles.stickyBox, {
+            className={cn(styles.innerBox, {
               [styles.minimized]: !sideBar.isOpen,
             })}
           >
-            <Flex
-              align="center"
-              content="space-between"
-              className={cn(styles.logoBox, {
+            <div
+              className={cn(styles.stickyBox, {
                 [styles.minimized]: !sideBar.isOpen,
               })}
             >
-              <Image
-                src="/logo.svg"
-                alt="Logo"
-                width={27}
-                height={27}
-                draggable={false}
-              />
+              <Flex
+                align="center"
+                content="space-between"
+                className={cn(styles.logoBox, {
+                  [styles.minimized]: !sideBar.isOpen,
+                })}
+              >
+                <Image
+                  src="/logo.svg"
+                  alt="Logo"
+                  width={27}
+                  height={27}
+                  draggable={false}
+                />
 
-              <button className={styles.toggle} onClick={clickHandler}>
-                <AlignRight />
-              </button>
-            </Flex>
+                <button className={styles.toggle} onClick={clickHandler}>
+                  <AlignRight />
+                </button>
+              </Flex>
 
-            <Flex direction="column" className={styles.avatarBox}>
-              {sideBar.isOpen ? (
-                <Avatar variant="normal" />
-              ) : (
-                <Avatar variant="mini" />
-              )}
-            </Flex>
+              <Flex direction="column" className={styles.avatarBox}>
+                {sideBar.isOpen ? (
+                  <Avatar variant="normal" />
+                ) : (
+                  <Avatar variant="mini" />
+                )}
+              </Flex>
 
-            <div className={styles.divider}></div>
+              <div className={styles.divider}></div>
 
-            <div
-              className={cn(styles.meta, {
-                [styles.hide]: !sideBar.isOpen,
-              })}
-            >
-              <h1 className={styles.username}>Haris Ahmed</h1>
-              <h2 className={styles.specialty}>Assistant professor</h2>
+              <div
+                className={cn(styles.meta, {
+                  [styles.hide]: !sideBar.isOpen,
+                })}
+              >
+                <h1 className={styles.username}>Haris Ahmed</h1>
+                <h2 className={styles.specialty}>Assistant professor</h2>
+              </div>
             </div>
-          </div>
 
-          <SideBarMenu
-            className={cn(styles.menu, {
-              [styles.minimized]: !sideBar.isOpen,
-            })}
-          />
-        </div>
-      </ScrollBox>
+            <SideBarMenu
+              className={cn(styles.menu, {
+                [styles.minimized]: !sideBar.isOpen,
+              })}
+            />
+          </div>
+        </ScrollBox>
+      </div>
     </motion.div>
   )
 }

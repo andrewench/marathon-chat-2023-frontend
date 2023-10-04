@@ -15,6 +15,7 @@ export const MessageItem: FC<{ children: string }> = ({ children }) => {
         width={40}
         height={40}
         draggable={false}
+        className={styles.avatar}
       />
 
       <div className={styles.message}>

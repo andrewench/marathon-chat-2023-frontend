@@ -1,5 +1,7 @@
 import { Share2 } from 'lucide-react'
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
+
+import { useAnimate } from 'framer-motion'
 
 import { Chat, Flex, Header, VideoPlayer } from '@/components/layout'
 
@@ -10,12 +12,36 @@ import { StyledGradientMaskIcon } from '@/components/icons'
 import styles from './content.module.scss'
 
 export const Content: FC = () => {
+  const [isOverlay, setOverlay] = useState<boolean>(false)
+
+  const [contentRef, animate] = useAnimate<HTMLDivElement>()
+
+  useEffect(() => {
+    if (isOverlay) {
+      animate(
+        contentRef.current,
+        {
+          transform: ['translateY(0px)', 'translateY(30px)', 'translateY(0)'],
+        },
+        { duration: 0.3 },
+      )
+    } else {
+      animate(
+        contentRef.current,
+        {
+          transform: ['translateY(0px)', 'translateY(30px)', 'translateY(0)'],
+        },
+        { duration: 0.3 },
+      )
+    }
+  }, [animate, contentRef, isOverlay])
+
   return (
     <div className={styles.box}>
-      <Header />
+      <Header isOverlay={isOverlay} setOverlay={setOverlay} />
 
       <Flex content="space-between" className={styles.content}>
-        <div className={styles.lessonBox}>
+        <div className={styles.lessonBox} ref={contentRef}>
           <VideoPlayer />
 
           <Flex align="center" content="space-between">

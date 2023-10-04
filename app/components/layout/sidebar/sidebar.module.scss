@@ -2,6 +2,10 @@
   @apply min-h-screen bg-marathon-black border-r-[1px] border-r-[#32343f] flex-shrink-0;
 }
 
+.stickyWrap {
+  @apply sticky top-0;
+}
+
 .innerBox {
   &:not(.minimized) {
     @apply py-9;

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { ForwardedRef, forwardRef } from 'react'
 
 import cn from 'clsx'
 
@@ -19,16 +19,20 @@ interface IFlex {
   reversed?: boolean
 }
 
-export const Flex: FC<PropsWithClassNameAndChildren<IFlex>> = ({
-  direction = 'row',
-  align = 'start',
-  content = 'start',
-  reversed,
-  children,
-  className,
-}) => {
+export const Flex = forwardRef(function Flex(
+  {
+    direction = 'row',
+    align,
+    content = 'start',
+    reversed,
+    children,
+    className,
+  }: PropsWithClassNameAndChildren<IFlex>,
+  ref?: ForwardedRef<HTMLDivElement>,
+) {
   return (
     <div
+      ref={ref}
       className={cn(
         styles.box,
         {
@@ -50,4 +54,4 @@ export const Flex: FC<PropsWithClassNameAndChildren<IFlex>> = ({
       {children}
     </div>
   )
-}
+})

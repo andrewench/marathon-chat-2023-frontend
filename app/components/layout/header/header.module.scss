@@ -1,7 +1,25 @@
+.wrap {
+  @apply w-full h-[140px] sticky top-0;
+
+  &.overlay {
+    @apply z-[1000];
+  }
+}
+
 .box {
-  @apply h-[140px] w-full pt-7 px-5 bg-fixed;
+  @apply w-full px-5 bg-fixed;
+
+  transition: 0.3s height;
 
   background: linear-gradient(45deg, #2b798f, #8a4ba9, #d2ae51, #c94a4e);
+
+  &:not(.minimized) {
+    @apply h-[140px] pt-7;
+  }
+
+  &.minimized {
+    @apply h-[90px] pt-5;
+  }
 }
 
 .left {
