@@ -12,11 +12,13 @@ import { StyledGradientMaskIcon } from '@/components/icons'
 import styles from './content.module.scss'
 
 export const Content: FC = () => {
-  const [isOverlay, setOverlay] = useState<boolean>(false)
+  const [isOverlay, setOverlay] = useState<boolean>()
 
   const [contentRef, animate] = useAnimate<HTMLDivElement>()
 
   useEffect(() => {
+    if (isOverlay === undefined) return
+
     if (isOverlay) {
       animate(
         contentRef.current,

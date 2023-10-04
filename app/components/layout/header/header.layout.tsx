@@ -13,8 +13,8 @@ import { Counter } from '@/components/shared'
 import styles from './header.module.scss'
 
 interface IHeader {
-  isOverlay: boolean
-  setOverlay: Dispatch<SetStateAction<boolean>>
+  isOverlay: boolean | undefined
+  setOverlay: Dispatch<SetStateAction<boolean | undefined>>
 }
 
 export const Header: FC<IHeader> = ({ isOverlay, setOverlay }) => {
@@ -34,7 +34,7 @@ export const Header: FC<IHeader> = ({ isOverlay, setOverlay }) => {
     return () => {
       document.removeEventListener('scroll', scrollHandler)
     }
-  }, [setOverlay])
+  }, [isOverlay, setOverlay])
 
   return (
     <div
