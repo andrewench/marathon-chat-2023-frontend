@@ -92,7 +92,7 @@ export const VideoPlayer: FC = () => {
             [styles.roundedCorners]: !isFullScreen,
           })}
         >
-          <source src="" />
+          <source src="piano.mp4" />
         </video>
       </div>
 
