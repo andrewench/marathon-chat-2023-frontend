@@ -1,0 +1,17 @@
+.input {
+  @apply relative h-[50px] w-full flex-shrink-0 bg-[#090b1f] rounded-marathon-15 border-[1px] border-solid px-4 text-white;
+
+  border-left: 0;
+  border-right: 0;
+  border-image: linear-gradient(to right, transparent, #373a61, transparent) 1 1;
+
+  &:focus {
+    outline: none;
+    border-image: linear-gradient(to right, transparent, #f546d4, transparent) 1
+      1 !important;
+  }
+}
+
+.error {
+  @apply mt-1 ml-4 text-red-500;
+}
