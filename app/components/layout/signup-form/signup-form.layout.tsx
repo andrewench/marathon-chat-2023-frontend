@@ -1,9 +1,13 @@
 import { FC, memo } from 'react'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { SubmitHandler } from 'react-hook-form'
 
-import { Flex, FormLayout } from '@/components/layout'
+import { FormLayout } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
+
+import { SignUpFieldsSchema } from '@/shared/schemes'
+
+import { useConfiguredForm } from '@/shared/hooks'
 
 import { SignUpCredentialsType } from '@/shared/types'
 
@@ -18,7 +22,7 @@ const RenderedFields = memo(function RenderedFields() {
 })
 
 export const SignUpForm: FC = () => {
-  const methods = useForm<SignUpCredentialsType>()
+  const methods = useConfiguredForm<SignUpCredentialsType>(SignUpFieldsSchema)
 
   const onSubmit: SubmitHandler<SignUpCredentialsType> = data => {
     console.log(data)

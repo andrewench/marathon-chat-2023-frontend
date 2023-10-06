@@ -5,6 +5,10 @@ import { FormLayout } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
 
+import { LoginFieldsSchema } from '@/shared/schemes'
+
+import { useConfiguredForm } from '@/shared/hooks'
+
 import styles from './login-form.module.scss'
 
 interface ILoginCredentials {
@@ -13,9 +17,7 @@ interface ILoginCredentials {
 }
 
 export const LoginForm: FC = () => {
-  const methods = useForm<ILoginCredentials>({
-    mode: 'onChange',
-  })
+  const methods = useConfiguredForm<ILoginCredentials>(LoginFieldsSchema)
 
   const onSubmit: SubmitHandler<ILoginCredentials> = payload => {
     console.log(payload)

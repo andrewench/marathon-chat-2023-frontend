@@ -16,6 +16,7 @@
     "^@/components/providers",
     "^@/components/ui",
     "^@/components/icons",
+    "^@/shared/schemes",
     "^@/shared/presets",
     "^@/shared/hooks",
     "^@/shared/types",

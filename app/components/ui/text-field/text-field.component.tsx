@@ -40,7 +40,9 @@ export const TextField = <T extends FieldValues>({
         {...overrideRegister}
       />
 
-      {errors[field] && <p className={styles.error}>Invalid format error</p>}
+      {errors && errors[field]?.message && (
+        <p className={styles.error}>{errors[field]?.message as string}</p>
+      )}
     </div>
   )
 }
