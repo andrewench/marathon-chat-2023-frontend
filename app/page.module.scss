@@ -19,7 +19,7 @@
 }
 
 .box {
-  @apply pt-10 flex flex-col items-center min-h-screen rounded-marathon-20 w-[500px] h-[600px] p-7 backdrop-blur-2xl border-[1px] border-neutral-300/10;
+  @apply pt-10 flex flex-col items-center min-h-screen rounded-marathon-20 w-[500px] min-h-screen p-7 backdrop-blur-2xl border-[1px] border-neutral-300/10;
 
   background: linear-gradient(180deg, #3030304d, transparent);
   border-bottom: 0;

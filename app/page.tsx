@@ -1,9 +1,11 @@
 'use client'
 
+import { useState } from 'react'
+
 import cn from 'clsx'
 import { motion } from 'framer-motion'
 
-import { Flex, LoginForm } from '@/components/layout'
+import { Flex, LoginForm, SignUpForm } from '@/components/layout'
 
 import { Heading } from '@/components/shared'
 
@@ -12,6 +14,8 @@ import { MainProvider } from '@/components/providers'
 import styles from './page.module.scss'
 
 const Main = () => {
+  const [tab, setTab] = useState<number>(0)
+
   return (
     <MainProvider>
       <Flex
@@ -31,11 +35,45 @@ const Main = () => {
           </Heading>
 
           <div className={styles.tabs}>
-            <button className={cn(styles.tab, styles.active)}>Sign In</button>
-            <button className={styles.tab}>Sign Up</button>
+            <button
+              className={cn(styles.tab, {
+                [styles.active]: !tab,
+              })}
+              onClick={() => setTab(0)}
+            >
+              Sign In
+            </button>
+            <button
+              className={cn(styles.tab, {
+                [styles.active]: tab === 1,
+              })}
+              onClick={() => {
+                setTab(1)
+              }}
+            >
+              Sign Up
+            </button>
           </div>
 
-          <LoginForm />
+          {tab === 0 && (
+            <motion.div
+              initial={{ translateY: 30 }}
+              animate={{ translateY: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <LoginForm />
+            </motion.div>
+          )}
+
+          {tab === 1 && (
+            <motion.div
+              initial={{ translateY: 30 }}
+              animate={{ translateY: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <SignUpForm />
+            </motion.div>
+          )}
         </motion.div>
       </Flex>
     </MainProvider>

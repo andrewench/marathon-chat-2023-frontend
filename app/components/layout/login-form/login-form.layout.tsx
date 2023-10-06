@@ -27,17 +27,11 @@ export const LoginForm: FC = () => {
       onSubmit={onSubmit}
       className={styles.form}
     >
-      <TextField<ILoginCredentials>
-        placeholder="Login"
-        field="login"
-        autoComplete="off"
-        showError
-      />
+      <TextField<ILoginCredentials> placeholder="Login" field="login" />
       <TextField<ILoginCredentials>
         placeholder="Password"
         field="password"
         autoComplete="off"
-        showError
       />
 
       <button type="submit" className={styles.submit}>

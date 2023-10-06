@@ -12,3 +12,4 @@ export { ChatTabs } from './chat-tabs/chat-tabs.layout'
 export { FormLayout } from './form/form.layout'
 
 export { LoginForm } from './login-form/login-form.layout'
+export { SignUpForm } from './signup-form/signup-form.layout'

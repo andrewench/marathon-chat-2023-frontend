@@ -1,0 +1,9 @@
+.form {
+  @apply flex flex-col gap-4 w-[320px];
+}
+
+.submit {
+  @apply rounded-marathon-20 text-white px-5 py-2 mx-auto block;
+
+  background: linear-gradient(90deg, #c731ef, #fe5f0c);
+}
