@@ -1,6 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
+import { FC, useEffect } from 'react'
 
 import cn from 'clsx'
 import { motion } from 'framer-motion'
@@ -11,10 +13,43 @@ import { Heading } from '@/components/shared'
 
 import { MainProvider } from '@/components/providers'
 
-import styles from './page.module.scss'
+import { AppConfig } from '@/shared/config'
 
-const Main = () => {
-  const [tab, setTab] = useState<number>(0)
+import { createQueryString } from '@/shared/utils'
+
+import styles from './login.module.scss'
+
+const Main: FC = () => {
+  const router = useRouter()
+  const pathname = usePathname()
+  const params = useSearchParams()
+
+  const {
+    login: { queries },
+  } = AppConfig
+
+  const actQuery = params.get(queries.act.key)
+
+  useEffect(() => {
+    const { path } = createQueryString(pathname, [
+      {
+        key: queries.act.key,
+        value: queries.act.defaultValue,
+      },
+    ])
+
+    if (!actQuery || !queries.act.resolvedValues.includes(actQuery)) {
+      router.replace(path)
+    }
+  }, [
+    actQuery,
+    params,
+    pathname,
+    queries.act.defaultValue,
+    queries.act.key,
+    queries.act.resolvedValues,
+    router,
+  ])
 
   return (
     <MainProvider>
@@ -36,26 +71,32 @@ const Main = () => {
 
           <div className={styles.tabs}>
             <button
+              onClick={() => {
+                router.replace(pathname + '?' + 'act=sign_in', {
+                  scroll: false,
+                })
+              }}
               className={cn(styles.tab, {
-                [styles.active]: !tab,
+                [styles.active]: actQuery === 'sign_in',
               })}
-              onClick={() => setTab(0)}
             >
               Sign In
             </button>
             <button
-              className={cn(styles.tab, {
-                [styles.active]: tab === 1,
-              })}
               onClick={() => {
-                setTab(1)
+                router.replace(pathname + '?' + 'act=sign_up', {
+                  scroll: false,
+                })
               }}
+              className={cn(styles.tab, {
+                [styles.active]: actQuery === 'sign_up',
+              })}
             >
               Sign Up
             </button>
           </div>
 
-          {tab === 0 && (
+          {(!actQuery || actQuery === 'sign_in') && (
             <motion.div
               initial={{ translateY: 30 }}
               animate={{ translateY: 0 }}
@@ -65,7 +106,7 @@ const Main = () => {
             </motion.div>
           )}
 
-          {tab === 1 && (
+          {actQuery === 'sign_up' && (
             <motion.div
               initial={{ translateY: 30 }}
               animate={{ translateY: 0 }}

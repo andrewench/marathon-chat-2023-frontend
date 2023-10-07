@@ -10,8 +10,11 @@
       "@/store": ["store"],
       "@/store/slices": ["store/slices"],
       "@/shared/schemes": ["shared/schemes"],
+      "@/shared/config": ["shared/config"],
       "@/shared/presets": ["shared/presets"],
+      "@/shared/fonts": ["shared/fonts"],
       "@/shared/hooks": ["shared/hooks"],
+      "@/shared/utils": ["shared/utils"],
       "@/shared/types": ["shared/types"],
       "@/*": ["./*"]
     }
