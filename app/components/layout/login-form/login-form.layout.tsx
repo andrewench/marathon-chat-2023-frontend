@@ -61,10 +61,15 @@ export const LoginForm: FC = () => {
       onSubmit={onSubmit}
       className={styles.form}
     >
-      <TextField<TLoginCredentials> placeholder="Login" field="login" />
+      <TextField<TLoginCredentials>
+        placeholder="Login"
+        field="login"
+        type="text"
+      />
       <TextField<TLoginCredentials>
         placeholder="Password"
         field="password"
+        type="password"
         autoComplete="off"
       />
 

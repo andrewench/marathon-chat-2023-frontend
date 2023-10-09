@@ -11,6 +11,7 @@
       "@/store/api": ["store/api"],
       "@/store/slices": ["store/slices"],
       "@/shared/constants": ["shared/constants"],
+      "@/shared/patterns": ["shared/patterns"],
       "@/shared/schemes": ["shared/schemes"],
       "@/shared/presets": ["shared/presets"],
       "@/shared/fonts": ["shared/fonts"],

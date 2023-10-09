@@ -23,4 +23,11 @@ export const AppConstant = {
       lifeTime: 60 * 10,
     },
   },
+
+  validate: {
+    stringPattern: {
+      min: 'The field must be at least $ characters',
+      max: 'The field must be no more than $ characters',
+    },
+  },
 }

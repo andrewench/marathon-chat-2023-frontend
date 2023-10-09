@@ -14,7 +14,7 @@ import { SignUpFieldsSchema } from '@/shared/schemes'
 
 import { useConfiguredForm } from '@/shared/hooks'
 
-import { TSignUpCredentials } from '@/shared/types'
+import { TErrorResponse, TSignUpCredentials } from '@/shared/types'
 
 import { useSignUpMutation } from '@/store/api'
 
@@ -60,7 +60,9 @@ export const SignUpForm: FC = () => {
   useEffect(() => {
     if (!error) return
 
-    toast.error('Error')
+    const { data } = error as TErrorResponse
+
+    toast.error(data.message)
   }, [error])
 
   return (

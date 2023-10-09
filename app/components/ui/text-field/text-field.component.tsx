@@ -12,8 +12,8 @@ import styles from './text-field.module.scss'
 export const TextField = <T extends FieldValues>({
   placeholder,
   field,
+  type,
   autoComplete,
-  showError,
   className,
 }: PropsWithClassName<ITextField<T>>) => {
   const {
@@ -36,6 +36,7 @@ export const TextField = <T extends FieldValues>({
       <input
         placeholder={placeholder}
         autoComplete={autoComplete}
+        type={type}
         className={styles.input}
         {...overrideRegister}
       />

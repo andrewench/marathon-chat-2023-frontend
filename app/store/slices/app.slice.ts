@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-import { RootStateType } from '@/shared/types'
+import { TRootState } from '@/shared/types'
 
 interface IState {
   sideBar: {
@@ -26,4 +26,4 @@ const appSlice = createSlice({
 
 export const { actions: appActions, reducer: appReducer } = appSlice
 
-export const app = (state: RootStateType) => state.app
+export const app = (state: TRootState) => state.app
