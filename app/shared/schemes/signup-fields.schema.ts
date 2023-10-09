@@ -1,8 +1,8 @@
 import { ObjectSchema, object, string } from 'yup'
 
-import { SignUpCredentialsType } from '@/shared/types'
+import { TSignUpCredentials } from '@/shared/types'
 
-export const SignUpFieldsSchema: ObjectSchema<SignUpCredentialsType> =
+export const SignUpFieldsSchema: ObjectSchema<TSignUpCredentials> =
   object().shape({
     firstName: string().required('The field is required'),
     lastName: string().required('The field is required'),

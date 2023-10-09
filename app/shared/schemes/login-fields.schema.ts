@@ -1,8 +1,8 @@
 import { ObjectSchema, object, string } from 'yup'
 
-import { LoginCredentialsType } from '@/shared/types'
+import { TLoginCredentials } from '@/shared/types'
 
-export const LoginFieldsSchema: ObjectSchema<LoginCredentialsType> =
+export const LoginFieldsSchema: ObjectSchema<TLoginCredentials> =
   object().shape({
     login: string().required('The field is required'),
     password: string().required('The field is required'),

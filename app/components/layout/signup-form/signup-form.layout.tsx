@@ -1,5 +1,8 @@
-import { FC, memo } from 'react'
+import { FC, memo, useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-toastify'
+
+import Cookies from 'js-cookie'
 
 import { FormLayout } from '@/components/layout'
 
@@ -7,9 +10,13 @@ import { TextField } from '@/components/ui'
 
 import { SignUpFieldsSchema } from '@/shared/schemes'
 
+import { AppConfig } from '@/shared/config'
+
 import { useConfiguredForm } from '@/shared/hooks'
 
-import { SignUpCredentialsType } from '@/shared/types'
+import { TSignUpCredentials } from '@/shared/types'
+
+import { useSignUpMutation } from '@/store/api'
 
 import { SignUpFieldsList } from './signup-form.data'
 
@@ -17,16 +24,44 @@ import styles from './signup-form.module.scss'
 
 const RenderedFields = memo(function RenderedFields() {
   return SignUpFieldsList.map((props, idx) => (
-    <TextField<SignUpCredentialsType> {...props} key={idx} />
+    <TextField<TSignUpCredentials> {...props} key={idx} />
   ))
 })
 
 export const SignUpForm: FC = () => {
-  const methods = useConfiguredForm<SignUpCredentialsType>(SignUpFieldsSchema)
+  const methods = useConfiguredForm<TSignUpCredentials>(SignUpFieldsSchema)
 
-  const onSubmit: SubmitHandler<SignUpCredentialsType> = data => {
-    console.log(data)
+  const [signUp, { data, error }] = useSignUpMutation()
+
+  const onSubmit: SubmitHandler<TSignUpCredentials> = payload => {
+    const { firstName, lastName, login, email, password } = payload
+
+    signUp({
+      firstName,
+      lastName,
+      login,
+      email,
+      password,
+    })
   }
+
+  useEffect(() => {
+    if (!data) return
+
+    const { accessToken } = data
+
+    Cookies.set(AppConfig.tokens.at.prefix, accessToken, {
+      expires: AppConfig.tokens.at.lifeTime,
+    })
+
+    toast.success('The user has been successfully registered')
+  }, [data])
+
+  useEffect(() => {
+    if (!error) return
+
+    toast.error('Error')
+  }, [error])
 
   return (
     <FormLayout methods={methods} onSubmit={onSubmit} className={styles.form}>

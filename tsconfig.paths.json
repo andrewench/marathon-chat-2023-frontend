@@ -8,6 +8,7 @@
       "@/components/icons": ["components/icons"],
       "@/components/shared": ["components/shared"],
       "@/store": ["store"],
+      "@/store/api": ["store/api"],
       "@/store/slices": ["store/slices"],
       "@/shared/schemes": ["shared/schemes"],
       "@/shared/config": ["shared/config"],

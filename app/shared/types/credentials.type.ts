@@ -1,10 +1,7 @@
-type AllCredentialsType = Record<
+type TAllCredentials = Record<
   'firstName' | 'lastName' | 'login' | 'email' | 'password' | 'confirm',
   string
 >
 
-export type LoginCredentialsType = Pick<
-  AllCredentialsType,
-  'login' | 'password'
->
-export type SignUpCredentialsType = AllCredentialsType
+export type TLoginCredentials = Pick<TAllCredentials, 'login' | 'password'>
+export type TSignUpCredentials = TAllCredentials

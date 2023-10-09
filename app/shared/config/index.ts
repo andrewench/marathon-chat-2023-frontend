@@ -12,4 +12,15 @@ export const AppConfig = {
       },
     },
   },
+
+  tokens: {
+    at: {
+      prefix: 'at',
+      lifeTime: 60 * 5,
+    },
+    rt: {
+      prefix: 'rt',
+      lifeTime: 60 * 10,
+    },
+  },
 }
