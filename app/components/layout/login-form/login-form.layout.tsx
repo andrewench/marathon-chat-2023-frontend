@@ -4,15 +4,15 @@ import { FC, useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { FormLayout } from '@/components/layout'
+import { Form } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
 
 import { LoginFieldsSchema } from '@/shared/schemes'
 
-import { useConfiguredForm } from '@/shared/hooks'
+import { useConfiguredForm, useErrorToast } from '@/shared/hooks'
 
-import { TErrorResponse, TLoginCredentials } from '@/shared/types'
+import { TLoginCredentials } from '@/shared/types'
 
 import { useLoginMutation } from '@/store/api'
 
@@ -47,16 +47,12 @@ export const LoginForm: FC = () => {
       .then(() => router.push('/classroom'))
   }, [data, router])
 
-  useEffect(() => {
-    if (!error) return
-
-    const { data } = error as TErrorResponse
-
-    toast.error(data.message)
-  }, [error])
+  useErrorToast({
+    error,
+  })
 
   return (
-    <FormLayout<TLoginCredentials>
+    <Form<TLoginCredentials>
       methods={methods}
       onSubmit={onSubmit}
       className={styles.form}
@@ -76,6 +72,6 @@ export const LoginForm: FC = () => {
       <button type="submit" className={styles.submit}>
         Sign In
       </button>
-    </FormLayout>
+    </Form>
   )
 }

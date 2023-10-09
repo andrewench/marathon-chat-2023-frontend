@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 
 import Cookies from 'js-cookie'
 
-import { FormLayout } from '@/components/layout'
+import { Form } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
 
@@ -12,9 +12,9 @@ import { AppConstant } from '@/shared/constants'
 
 import { SignUpFieldsSchema } from '@/shared/schemes'
 
-import { useConfiguredForm } from '@/shared/hooks'
+import { useConfiguredForm, useErrorToast } from '@/shared/hooks'
 
-import { TErrorResponse, TSignUpCredentials } from '@/shared/types'
+import { TSignUpCredentials } from '@/shared/types'
 
 import { useSignUpMutation } from '@/store/api'
 
@@ -57,21 +57,17 @@ export const SignUpForm: FC = () => {
     toast.success('The user has been successfully registered')
   }, [data])
 
-  useEffect(() => {
-    if (!error) return
-
-    const { data } = error as TErrorResponse
-
-    toast.error(data.message)
-  }, [error])
+  useErrorToast({
+    error,
+  })
 
   return (
-    <FormLayout methods={methods} onSubmit={onSubmit} className={styles.form}>
+    <Form methods={methods} onSubmit={onSubmit} className={styles.form}>
       <RenderedFields />
 
       <button type="submit" className={styles.submit}>
         Sign Up
       </button>
-    </FormLayout>
+    </Form>
   )
 }

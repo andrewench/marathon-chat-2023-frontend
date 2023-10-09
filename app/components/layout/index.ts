@@ -9,7 +9,7 @@ export { Chat } from './chat/chat.layout'
 export { VideoPlayer } from './video-player/video-player.layout'
 export { ChatField } from './chat-field/chat-field.layout'
 export { ChatTabs } from './chat-tabs/chat-tabs.layout'
-export { FormLayout } from './form/form.layout'
+export { Form } from './form/form.layout'
 
 export { LoginForm } from './login-form/login-form.layout'
 export { SignUpForm } from './signup-form/signup-form.layout'

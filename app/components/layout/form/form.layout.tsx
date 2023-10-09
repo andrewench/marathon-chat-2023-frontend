@@ -9,17 +9,17 @@ import cn from 'clsx'
 
 import { PropsWithClassNameAndChildren } from '@/shared/types'
 
-interface IFormLayout<T extends FieldValues> {
+interface IForm<T extends FieldValues> {
   methods: UseFormReturn<T>
   onSubmit: SubmitHandler<T>
 }
 
-export const FormLayout = <T extends FieldValues>({
+export const Form = <T extends FieldValues>({
   methods,
   onSubmit,
   children,
   className,
-}: PropsWithClassNameAndChildren<IFormLayout<T>>) => {
+}: PropsWithClassNameAndChildren<IForm<T>>) => {
   return (
     <FormProvider {...methods}>
       <form
