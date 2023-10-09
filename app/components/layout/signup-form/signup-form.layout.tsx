@@ -8,9 +8,9 @@ import { FormLayout } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
 
-import { SignUpFieldsSchema } from '@/shared/schemes'
+import { AppConstant } from '@/shared/constants'
 
-import { AppConfig } from '@/shared/config'
+import { SignUpFieldsSchema } from '@/shared/schemes'
 
 import { useConfiguredForm } from '@/shared/hooks'
 
@@ -50,8 +50,8 @@ export const SignUpForm: FC = () => {
 
     const { accessToken } = data
 
-    Cookies.set(AppConfig.tokens.at.prefix, accessToken, {
-      expires: AppConfig.tokens.at.lifeTime,
+    Cookies.set(AppConstant.tokens.at.prefix, accessToken, {
+      expires: AppConstant.tokens.at.lifeTime,
     })
 
     toast.success('The user has been successfully registered')

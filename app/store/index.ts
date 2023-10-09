@@ -13,5 +13,3 @@ export const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware().concat([userApi.middleware]),
 })
-
-export const selectedStore = (state: ReturnType<typeof store.getState>) => state

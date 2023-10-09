@@ -13,7 +13,7 @@ import { Heading } from '@/components/shared'
 
 import { MainProvider } from '@/components/providers'
 
-import { AppConfig } from '@/shared/config'
+import { AppConstant } from '@/shared/constants'
 
 import { createQueryString } from '@/shared/utils'
 
@@ -26,7 +26,7 @@ const Main: FC = () => {
 
   const {
     login: { queries },
-  } = AppConfig
+  } = AppConstant
 
   const actQuery = params.get(queries.act.key)
 

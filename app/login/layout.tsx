@@ -2,14 +2,14 @@ import type { Metadata } from 'next'
 
 import { FC, PropsWithChildren } from 'react'
 
-import { AppConfig } from '@/shared/config'
+import { AppConstant } from '@/shared/constants'
 
 import { roboto } from '@/shared/fonts'
 
 import '@/assets/styles/global.scss'
 
 export const metadata: Metadata = {
-  title: AppConfig.app.titlePrefix + 'Log in',
+  title: AppConstant.app.titlePrefix + 'Log in',
 }
 
 const LoginLayout: FC<PropsWithChildren> = ({ children }) => {
