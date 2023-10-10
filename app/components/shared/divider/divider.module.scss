@@ -1,0 +1,19 @@
+.box {
+  @apply border-dashed border-[#232340];
+
+  &.thin {
+    @apply border-t-[1px] h-[1px];
+  }
+
+  &.medium {
+    @apply border-[1px];
+  }
+
+  &.marginY5 {
+    @apply my-5;
+  }
+
+  &.marginY10 {
+    @apply my-10;
+  }
+}

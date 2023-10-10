@@ -1,29 +1,32 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { TLoginCredentials, TSignUpCredentials } from '@/shared/types'
+import Cookies from 'js-cookie'
 
-type Tokens = Record<'accessToken' | 'refreshToken', string>
+import { AppConstant } from '@/shared/constants'
+
+import { IUser } from '@/shared/types'
 
 export const userApi = createApi({
+  reducerPath: 'userApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseUrl: AppConstant.app.baseApiUrl,
+    prepareHeaders: headers => {
+      const accessToken = Cookies.get(AppConstant.tokens.at.prefix)
+
+      if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`)
+
+      return headers
+    },
   }),
-  endpoints: ({ mutation }) => ({
-    login: mutation<Tokens, TLoginCredentials>({
-      query: body => ({
-        url: 'auth/login',
-        method: 'POST',
-        body,
+  tagTypes: ['User'],
+  endpoints: ({ query }) => ({
+    getMe: query<IUser, null>({
+      query: () => ({
+        url: 'user/me',
       }),
-    }),
-    signUp: mutation<Tokens, Omit<TSignUpCredentials, 'confirm'>>({
-      query: body => ({
-        url: 'auth/signup',
-        method: 'PUT',
-        body,
-      }),
+      providesTags: () => ['User'],
     }),
   }),
 })
 
-export const { useLoginMutation, useSignUpMutation } = userApi
+export const { useGetMeQuery } = userApi

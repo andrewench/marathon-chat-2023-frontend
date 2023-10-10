@@ -48,10 +48,14 @@ export const SignUpForm: FC = () => {
   useEffect(() => {
     if (!data) return
 
-    const { accessToken } = data
+    const { accessToken, refreshToken } = data
 
     Cookies.set(AppConstant.tokens.at.prefix, accessToken, {
       expires: AppConstant.tokens.at.lifeTime,
+    })
+
+    Cookies.set(AppConstant.tokens.rt.prefix, refreshToken, {
+      expires: AppConstant.tokens.rt.lifeTime,
     })
 
     toast.success('The user has been successfully registered')

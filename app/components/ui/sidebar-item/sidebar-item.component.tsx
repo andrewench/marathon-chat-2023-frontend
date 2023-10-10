@@ -12,9 +12,10 @@ import styles from './sidebar-item.module.scss'
 interface ISideBarItem {
   label: string
   icon: ReactNode
+  onClick?: () => void
 }
 
-export const SideBarItem: FC<ISideBarItem> = ({ label, icon }) => {
+export const SideBarItem: FC<ISideBarItem> = ({ label, icon, onClick }) => {
   const { sideBar } = useAppSelector(app)
 
   return (
@@ -22,6 +23,7 @@ export const SideBarItem: FC<ISideBarItem> = ({ label, icon }) => {
       <motion.button
         whileHover={{ scale: 1.05 }}
         transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        onClick={onClick}
         className={cn(styles.button, {
           [styles.minimized]: !sideBar.isOpen,
         })}

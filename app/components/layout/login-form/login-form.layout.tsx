@@ -4,9 +4,13 @@ import { FC, useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import Cookies from 'js-cookie'
+
 import { Form } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
+
+import { AppConstant } from '@/shared/constants'
 
 import { LoginFieldsSchema } from '@/shared/schemes'
 
@@ -31,6 +35,16 @@ export const LoginForm: FC = () => {
 
   useEffect(() => {
     if (!data) return
+
+    const { accessToken, refreshToken } = data
+
+    Cookies.set(AppConstant.tokens.at.prefix, accessToken, {
+      expires: AppConstant.tokens.at.lifeTime,
+    })
+
+    Cookies.set(AppConstant.tokens.rt.prefix, refreshToken, {
+      expires: AppConstant.tokens.rt.lifeTime,
+    })
 
     const promise = new Promise<void>(resolve => {
       setTimeout(() => {

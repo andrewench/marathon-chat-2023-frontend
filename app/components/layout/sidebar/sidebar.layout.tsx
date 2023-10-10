@@ -12,7 +12,7 @@ import { Avatar } from '@/components/shared'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
 
-import { app } from '@/store/slices'
+import { app, user } from '@/store/slices'
 
 import styles from './sidebar.module.scss'
 
@@ -22,6 +22,8 @@ export const SideBar: FC = () => {
   const { setSideBar } = useActions()
 
   const { sideBar } = useAppSelector(app)
+
+  const { data: userData } = useAppSelector(user)
 
   const clickHandler = () => {
     if (!sideBarRef.current) return
@@ -106,7 +108,9 @@ export const SideBar: FC = () => {
                   [styles.hide]: !sideBar.isOpen,
                 })}
               >
-                <h1 className={styles.username}>Haris Ahmed</h1>
+                <h1 className={styles.username}>
+                  {userData.firstName + ' ' + userData.lastName}
+                </h1>
                 <h2 className={styles.specialty}>Assistant professor</h2>
               </div>
             </div>

@@ -5,7 +5,7 @@ import { useAnimate } from 'framer-motion'
 
 import { Chat, Flex, Header, VideoPlayer } from '@/components/layout'
 
-import { Heading } from '@/components/shared'
+import { Divider, Heading } from '@/components/shared'
 
 import { StyledGradientMaskIcon } from '@/components/icons'
 
@@ -63,7 +63,7 @@ export const Content: FC = () => {
             drawing
           </h3>
 
-          <div className={styles.divider} />
+          <Divider variant="medium" marginY={10} />
 
           <Heading as="h3" variant="styled" className={styles.heading}>
             Overview
