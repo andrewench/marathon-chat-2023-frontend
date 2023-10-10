@@ -1,6 +1,7 @@
-import { appActions, userActions } from '@/store/slices'
+import { appActions, modalsActions, userActions } from '@/store/slices'
 
 export const allActions = {
   ...appActions,
   ...userActions,
+  ...modalsActions,
 }

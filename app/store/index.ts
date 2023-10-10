@@ -1,4 +1,4 @@
-import { appReducer, userReducer } from './slices'
+import { appReducer, modalsReducer, userReducer } from './slices'
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { authApi, userApi } from '@/store/api'
@@ -6,6 +6,7 @@ import { authApi, userApi } from '@/store/api'
 const rootReducer = combineReducers({
   app: appReducer,
   user: userReducer,
+  modals: modalsReducer,
   [authApi.reducerPath]: authApi.reducer,
   [userApi.reducerPath]: userApi.reducer,
 })

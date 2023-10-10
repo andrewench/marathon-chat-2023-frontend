@@ -1,16 +1,11 @@
-import { useRouter } from 'next/navigation'
-
 import { LogOut } from 'lucide-react'
 import { memo } from 'react'
 
 import cn from 'clsx'
-import Cookies from 'js-cookie'
 
 import { Divider } from '@/components/shared'
 
 import { SideBarItem } from '@/components/ui'
-
-import { AppConstant } from '@/shared/constants'
 
 import { useActions } from '@/shared/hooks'
 
@@ -23,9 +18,7 @@ import styles from './sidebar-menu.module.scss'
 export const SideBarMenu = memo(function SideBarMenu({
   className,
 }: PropsWithClassName) {
-  const router = useRouter()
-
-  const { clearUserData } = useActions()
+  const { setModalWindow } = useActions()
 
   return (
     <ul className={cn(styles.list, className)}>
@@ -39,12 +32,10 @@ export const SideBarMenu = memo(function SideBarMenu({
         label="Log out"
         icon={<LogOut strokeWidth={1} />}
         onClick={() => {
-          router.push('/login')
-
-          Cookies.remove(AppConstant.tokens.at.prefix)
-          Cookies.remove(AppConstant.tokens.rt.prefix)
-
-          clearUserData()
+          setModalWindow({
+            modal: 'logout',
+            isOpen: true,
+          })
         }}
       />
     </ul>
