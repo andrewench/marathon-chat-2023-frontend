@@ -21,14 +21,29 @@ export const Chat: FC = () => {
               <div className={styles.chatList}>
                 <MessageItem>Hello. How are you?</MessageItem>
                 <MessageItem>
-                  We have lake-front vaction rentals. No specific liability.
+                  We have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability.
                 </MessageItem>
                 <MessageItem>Hello. How are you?</MessageItem>
                 <MessageItem>
-                  We have lake-front vaction rentals. No specific liability.
+                  We have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability.
                 </MessageItem>
                 <MessageItem>
-                  We have lake-front vaction rentals. No specific liability.
+                  We have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability. We
+                  have lake-front vaction rentals. No specific liability.
                 </MessageItem>
 
                 <div className={styles.myMessage}>

@@ -1,17 +1,30 @@
 .box {
-  @apply w-full px-5 mb-7 last:mb-0 gap-3;
+  @apply relative w-full px-5 mb-7 last:mb-0 gap-3;
 }
 
 .avatar {
-  @apply w-10 h-10 min-w-[40px] min-h-[40px];
+  @apply mt-[10px] sticky top-[10px] w-10 h-10 min-w-[40px] min-h-[40px];
 }
 
 .message {
-  @apply bg-[#01020a] w-full px-5 py-3 rounded-marathon-10;
+  @apply relative bg-[#01020a] w-full px-5 py-3 rounded-marathon-10 border-[1px] border-neutral-900/70;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -16px;
+    top: 20px;
+    border: 8px solid transparent;
+    border-right: 8px solid #01020a;
+    width: 0;
+    height: 0;
+    filter: drop-shadow(-1px 0px 0px rgb(23 23 23 / 1));
+  }
 }
 
 .text {
-  @apply text-white text-sm leading-5;
+  @apply text-neutral-300 text-sm leading-5;
 }
 
 .timestamp {
