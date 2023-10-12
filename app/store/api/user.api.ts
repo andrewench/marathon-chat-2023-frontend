@@ -1,23 +1,12 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi } from '@reduxjs/toolkit/query/react'
 
-import Cookies from 'js-cookie'
-
-import { AppConstant } from '@/shared/constants'
+import { customFetcher } from '@/shared/utils'
 
 import { IUser } from '@/shared/types'
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: AppConstant.app.baseApiUrl,
-    prepareHeaders: headers => {
-      const accessToken = Cookies.get(AppConstant.tokens.at.prefix)
-
-      if (accessToken) headers.set('Authorization', `Bearer ${accessToken}`)
-
-      return headers
-    },
-  }),
+  baseQuery: customFetcher,
   tagTypes: ['User'],
   endpoints: ({ query }) => ({
     getMe: query<IUser, null>({
