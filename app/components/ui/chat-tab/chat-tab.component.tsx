@@ -31,6 +31,7 @@ export const ChatTab: FC<PropsWithClassNameAndChildren<IChatTab>> = ({
 
   return (
     <StyledButton
+      type="button"
       variant={currentTab === tabIndex ? 'filled' : 'outline'}
       onClick={clickHandler}
       className={cn(styles.tab, className)}

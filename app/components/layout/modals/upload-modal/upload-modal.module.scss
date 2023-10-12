@@ -1,0 +1,19 @@
+.input {
+  @apply mt-5;
+}
+
+.wrap {
+  @apply mb-5;
+
+  & > img {
+    @apply block mx-auto object-cover rounded-[4px];
+  }
+}
+
+.form {
+  @apply mt-5;
+}
+
+.submit {
+  @apply mt-5 block w-[100px] rounded-marathon-20 ml-auto;
+}

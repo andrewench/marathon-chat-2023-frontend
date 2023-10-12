@@ -1,10 +1,13 @@
-import { FC, PropsWithChildren, useEffect, useRef } from 'react'
+import { FC, useEffect, useRef } from 'react'
 
+import cn from 'clsx'
 import { motion } from 'framer-motion'
 
 import { Heading } from '@/components/shared'
 
 import { useOutside } from '@/shared/hooks'
+
+import { PropsWithClassNameAndChildren } from '@/shared/types'
 
 import styles from './modal-window.module.scss'
 
@@ -13,10 +16,11 @@ interface IModalWindow {
   onClose: () => void
 }
 
-export const ModalWindow: FC<PropsWithChildren<IModalWindow>> = ({
+export const ModalWindow: FC<PropsWithClassNameAndChildren<IModalWindow>> = ({
   title,
   onClose,
   children,
+  className,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
@@ -48,7 +52,7 @@ export const ModalWindow: FC<PropsWithChildren<IModalWindow>> = ({
         exit={{ translateY: -100, opacity: 0 }}
         transition={{ duration: 0.3 }}
         ref={modalRef}
-        className={styles.window}
+        className={cn(styles.window, className)}
       >
         <Heading as="h1" className={styles.title}>
           {title}

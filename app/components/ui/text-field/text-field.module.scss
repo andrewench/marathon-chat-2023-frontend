@@ -1,5 +1,5 @@
-.input {
-  @apply relative h-[50px] w-full flex-shrink-0 bg-[#090b1f] rounded-marathon-15 border-[1px] border-solid px-4 text-white;
+.field {
+  @apply relative h-[50px] min-h-[50px] w-full flex-shrink-0 bg-[#090b1f] rounded-marathon-15 border-[1px] border-solid px-4 text-white;
 
   border-left: 0;
   border-right: 0;
@@ -10,6 +10,10 @@
     border-image: linear-gradient(to right, transparent, #f546d4, transparent) 1
       1 !important;
   }
+}
+
+.textarea {
+  @apply py-3;
 }
 
 .error {

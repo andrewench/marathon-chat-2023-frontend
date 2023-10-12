@@ -5,7 +5,12 @@ import { FC, PropsWithChildren, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import Cookies from 'js-cookie'
 
-import { ConfirmModalWindow, Flex, SideBar } from '@/components/layout'
+import {
+  ConfirmModalWindow,
+  Flex,
+  SideBar,
+  UploadModalWindow,
+} from '@/components/layout'
 
 import { AppConstant } from '@/shared/constants'
 
@@ -22,7 +27,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const router = useRouter()
 
-  const { logout } = useAppSelector(modals)
+  const { logout, upload } = useAppSelector(modals)
 
   const { setUserData, setModalWindow, clearUserData } = useActions()
 
@@ -60,6 +65,8 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
             }}
           />
         )}
+
+        {upload.isOpen && <UploadModalWindow title="Attach file" />}
       </AnimatePresence>
 
       {children}

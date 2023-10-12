@@ -1,20 +1,26 @@
 import { useMemo } from 'react'
-import { FieldValues, useFormContext } from 'react-hook-form'
+import { FieldValues, Path, useFormContext } from 'react-hook-form'
 
 import cn from 'clsx'
 
-import { PropsWithClassName } from '@/shared/types'
-
-import { ITextField } from './text-field.interface'
+import { PropsWithClassName, TInputRole } from '@/shared/types'
 
 import styles from './text-field.module.scss'
 
+export interface ITextField<T extends FieldValues> {
+  placeholder: string
+  field: Path<T>
+  autoComplete?: 'on' | 'off'
+  type?: TInputRole
+  multiLine?: boolean
+}
+
 export const TextField = <T extends FieldValues>({
-  placeholder,
   field,
-  type,
   autoComplete,
+  multiLine,
   className,
+  ...props
 }: PropsWithClassName<ITextField<T>>) => {
   const {
     register,
@@ -31,15 +37,22 @@ export const TextField = <T extends FieldValues>({
     [field, register],
   )
 
+  const fieldProps = {
+    ...overrideRegister,
+    ...props,
+    className: cn(
+      styles.field,
+      {
+        [styles.textarea]: multiLine,
+        'scroll-bar': multiLine,
+      },
+      className,
+    ),
+  }
+
   return (
     <div className={cn(className)}>
-      <input
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        type={type}
-        className={styles.input}
-        {...overrideRegister}
-      />
+      {multiLine ? <textarea {...fieldProps} /> : <input {...fieldProps} />}
 
       {errors && errors[field]?.message && (
         <p className={styles.error}>{errors[field]?.message as string}</p>

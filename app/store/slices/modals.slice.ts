@@ -6,10 +6,16 @@ interface IState {
   logout: {
     isOpen: boolean
   }
+  upload: {
+    isOpen: boolean
+  }
 }
 
 const initialState: IState = {
   logout: {
+    isOpen: false,
+  },
+  upload: {
     isOpen: false,
   },
 }

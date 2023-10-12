@@ -26,6 +26,7 @@ export const ConfirmModalWindow: FC<IConfirmModalWindow> = ({
     <ModalWindow title={title} onClose={onClose}>
       <Flex content="end" className={styles.actions}>
         <StyledButton
+          type="button"
           variant="filled"
           onClick={() => onConfirm()}
           className={styles.button}
@@ -34,6 +35,7 @@ export const ConfirmModalWindow: FC<IConfirmModalWindow> = ({
         </StyledButton>
 
         <StyledButton
+          type="button"
           variant="outline"
           onClick={() => onClose()}
           className={styles.button}

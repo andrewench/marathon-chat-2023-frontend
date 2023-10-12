@@ -8,11 +8,13 @@ import { PropsWithClassNameAndChildren } from '@/shared/types'
 import styles from './styled-button.module.scss'
 
 interface IStyledButton {
+  type: 'button' | 'submit'
   variant: 'filled' | 'outline'
   onClick?: () => void
 }
 
 export const StyledButton: FC<PropsWithClassNameAndChildren<IStyledButton>> = ({
+  type,
   variant,
   onClick,
   children,
@@ -22,6 +24,7 @@ export const StyledButton: FC<PropsWithClassNameAndChildren<IStyledButton>> = ({
     <motion.button
       whileHover={{ scale: 1.05 }}
       transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+      type={type}
       onClick={onClick}
       className={cn(
         styles.button,

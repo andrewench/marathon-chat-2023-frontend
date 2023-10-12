@@ -8,11 +8,19 @@ import { Flex } from '@/components/layout'
 
 import { StyledButton } from '@/components/ui'
 
+import { useActions, useAppSelector } from '@/shared/hooks'
+
+import { modals } from '@/store/slices'
+
 import styles from './chat-field.module.scss'
 
 export const ChatField: FC = memo(function ChatField() {
   const [isPickerOpen, setPickerOpen] = useState<boolean>(false)
   const [message, setMessage] = useState<string>('')
+
+  const { setModalWindow } = useActions()
+
+  const { upload } = useAppSelector(modals)
 
   const togglePicker = () => {
     isPickerOpen ? setPickerOpen(false) : setPickerOpen(true)
@@ -47,7 +55,12 @@ export const ChatField: FC = memo(function ChatField() {
         <SmilePlus size={20} strokeWidth={2} />
       </button>
 
-      <button className={styles.button}>
+      <button
+        onClick={() => setModalWindow({ modal: 'upload', isOpen: true })}
+        className={cn(styles.button, {
+          [styles.styled]: upload.isOpen,
+        })}
+      >
         <Paperclip size={20} strokeWidth={2} />
       </button>
 
@@ -60,7 +73,7 @@ export const ChatField: FC = memo(function ChatField() {
         className={styles.input}
       />
 
-      <StyledButton variant="filled" className={styles.submit}>
+      <StyledButton type="button" variant="filled" className={styles.submit}>
         <Send size={18} strokeWidth={2} className={styles.submitIcon} />
       </StyledButton>
     </Flex>
