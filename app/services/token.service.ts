@@ -2,6 +2,8 @@ import Cookies from 'js-cookie'
 
 import { AppConstant } from '@/shared/constants'
 
+import { TAllTokens } from '@/shared/types'
+
 const { at, rt } = AppConstant.tokens
 
 export class TokenService {
@@ -11,10 +13,7 @@ export class TokenService {
   static readonly atExpires = at.lifeTime
   static readonly rtExpires = rt.lifeTime
 
-  static setTokens({
-    accessToken,
-    refreshToken,
-  }: Record<'accessToken' | 'refreshToken', string>) {
+  static setTokens({ accessToken, refreshToken }: TAllTokens) {
     Cookies.set(this.atPrefix, accessToken, {
       expires: this.atExpires,
     })

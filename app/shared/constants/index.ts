@@ -17,11 +17,11 @@ export const AppConstant = {
   tokens: {
     at: {
       prefix: 'at',
-      lifeTime: 60 * 5,
+      lifeTime: 60 * 15,
     },
     rt: {
       prefix: 'rt',
-      lifeTime: 60 * 10,
+      lifeTime: 60 * 60 * 24 * 7,
     },
   },
 
