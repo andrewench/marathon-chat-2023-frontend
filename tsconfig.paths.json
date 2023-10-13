@@ -10,6 +10,7 @@
       "@/store": ["store"],
       "@/store/api": ["store/api"],
       "@/store/slices": ["store/slices"],
+      "@/services": ["services"],
       "@/shared/constants": ["shared/constants"],
       "@/shared/patterns": ["shared/patterns"],
       "@/shared/schemes": ["shared/schemes"],

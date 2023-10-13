@@ -4,11 +4,11 @@ import { FC, useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import Cookies from 'js-cookie'
-
 import { Form } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
+
+import { TokenService } from '@/services'
 
 import { AppConstant } from '@/shared/constants'
 
@@ -27,24 +27,16 @@ export const LoginForm: FC = () => {
 
   const router = useRouter()
 
-  const [loginUser, { data, error }] = useLoginMutation()
+  const [loginUser, { data: tokens, error }] = useLoginMutation()
 
   const onSubmit: SubmitHandler<TLoginCredentials> = payload => {
     loginUser(payload)
   }
 
   useEffect(() => {
-    if (!data) return
+    if (!tokens) return
 
-    const { accessToken, refreshToken } = data
-
-    Cookies.set(AppConstant.tokens.at.prefix, accessToken, {
-      expires: AppConstant.tokens.at.lifeTime,
-    })
-
-    Cookies.set(AppConstant.tokens.rt.prefix, refreshToken, {
-      expires: AppConstant.tokens.rt.lifeTime,
-    })
+    TokenService.setTokens(tokens)
 
     const promise = new Promise<void>(resolve => {
       setTimeout(() => {
@@ -59,7 +51,7 @@ export const LoginForm: FC = () => {
         pending: 'Redirecting to account',
       })
       .then(() => router.push('/classroom'))
-  }, [data, router])
+  }, [tokens, router])
 
   useErrorToast({
     error,

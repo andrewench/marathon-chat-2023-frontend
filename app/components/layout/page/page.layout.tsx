@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation'
 import { FC, PropsWithChildren, useEffect } from 'react'
 
 import { AnimatePresence } from 'framer-motion'
-import Cookies from 'js-cookie'
 
 import {
   ConfirmModalWindow,
@@ -12,7 +11,7 @@ import {
   UploadModalWindow,
 } from '@/components/layout'
 
-import { AppConstant } from '@/shared/constants'
+import { TokenService } from '@/services'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
 
@@ -29,7 +28,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const { logout, upload } = useAppSelector(modals)
 
-  const { setUserData, setModalWindow, clearUserData } = useActions()
+  const { setUserData, setModalWindow } = useActions()
 
   useEffect(() => {
     if (!data) return
@@ -48,10 +47,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
             onConfirm={() => {
               router.push('/login')
 
-              Cookies.remove(AppConstant.tokens.at.prefix)
-              Cookies.remove(AppConstant.tokens.rt.prefix)
-
-              clearUserData()
+              TokenService.removeTokens()
             }}
             onClose={() => {
               setModalWindow({

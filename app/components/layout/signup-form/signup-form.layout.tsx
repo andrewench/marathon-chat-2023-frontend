@@ -1,14 +1,14 @@
+import { useRouter } from 'next/navigation'
+
 import { FC, memo, useEffect } from 'react'
 import { SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
-
-import Cookies from 'js-cookie'
 
 import { Form } from '@/components/layout'
 
 import { TextField } from '@/components/ui'
 
-import { AppConstant } from '@/shared/constants'
+import { TokenService } from '@/services'
 
 import { SignUpFieldsSchema } from '@/shared/schemes'
 
@@ -31,7 +31,9 @@ const RenderedFields = memo(function RenderedFields() {
 export const SignUpForm: FC = () => {
   const methods = useConfiguredForm<TSignUpCredentials>(SignUpFieldsSchema)
 
-  const [signUp, { data, error }] = useSignUpMutation()
+  const [signUp, { data: tokens, error }] = useSignUpMutation()
+
+  const router = useRouter()
 
   const onSubmit: SubmitHandler<TSignUpCredentials> = payload => {
     const { firstName, lastName, login, email, password } = payload
@@ -46,20 +48,26 @@ export const SignUpForm: FC = () => {
   }
 
   useEffect(() => {
-    if (!data) return
+    if (!tokens) return
 
-    const { accessToken, refreshToken } = data
-
-    Cookies.set(AppConstant.tokens.at.prefix, accessToken, {
-      expires: AppConstant.tokens.at.lifeTime,
-    })
-
-    Cookies.set(AppConstant.tokens.rt.prefix, refreshToken, {
-      expires: AppConstant.tokens.rt.lifeTime,
-    })
+    TokenService.setTokens(tokens)
 
     toast.success('The user has been successfully registered')
-  }, [data])
+
+    const promise = new Promise<void>(resolve => {
+      setTimeout(() => {
+        resolve()
+      }, 3000)
+    })
+
+    toast.success('You are successfully logged in')
+
+    toast
+      .promise(promise, {
+        pending: 'Redirecting to account',
+      })
+      .then(() => router.push('/classroom'))
+  }, [tokens, router])
 
   useErrorToast({
     error,
