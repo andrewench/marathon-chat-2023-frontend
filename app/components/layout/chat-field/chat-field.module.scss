@@ -6,6 +6,10 @@
   border-image: linear-gradient(to right, transparent, #373a61, transparent) 1 1;
 }
 
+.form {
+  @apply flex items-center h-full;
+}
+
 .picker {
   @apply absolute left-[1px] bottom-[calc(100%+20px)] w-full;
 }

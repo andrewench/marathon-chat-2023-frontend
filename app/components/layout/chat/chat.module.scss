@@ -37,10 +37,22 @@
 
 .chatList {
   @apply py-7;
+
+  &.emptyList {
+    @apply py-0 h-[calc(100vh-100px-50px-40px-80px)];
+  }
+}
+
+.emptyBox {
+  height: inherit;
+}
+
+.emptyLabel {
+  @apply text-[#222441] text-sm;
 }
 
 .myMessage {
-  @apply text-sm rounded-marathon-10 py-3 px-5 w-[70%] ml-auto mr-5;
+  @apply mb-5 last:mb-0 text-sm rounded-marathon-10 py-3 px-5 max-w-[70%] min-w-[50px] ml-auto mr-5;
 
   background: linear-gradient(90deg, #c731ef, #fe5f0c);
 }

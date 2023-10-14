@@ -1,10 +1,8 @@
 import EmojiPicker from 'emoji-picker-react'
 import { Paperclip, Send, SmilePlus } from 'lucide-react'
-import { ChangeEvent, FC, memo, useState } from 'react'
+import { ChangeEvent, FC, FormEvent, memo, useState } from 'react'
 
 import cn from 'clsx'
-
-import { Flex } from '@/components/layout'
 
 import { StyledButton } from '@/components/ui'
 
@@ -14,9 +12,14 @@ import { modals } from '@/store/slices'
 
 import styles from './chat-field.module.scss'
 
-export const ChatField: FC = memo(function ChatField() {
-  const [isPickerOpen, setPickerOpen] = useState<boolean>(false)
+interface IChatField {
+  onSubmit?: (message: string) => void
+}
+
+export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
   const [message, setMessage] = useState<string>('')
+
+  const [isPickerOpen, setPickerOpen] = useState<boolean>(false)
 
   const { setModalWindow } = useActions()
 
@@ -26,56 +29,73 @@ export const ChatField: FC = memo(function ChatField() {
     isPickerOpen ? setPickerOpen(false) : setPickerOpen(true)
   }
 
+  const onSubmitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+
+    if (!message.length) return
+
+    if (onSubmit) {
+      onSubmit(message)
+
+      setMessage('')
+    }
+  }
+
   return (
-    <Flex align="center" className={styles.inputBox}>
-      {isPickerOpen && (
-        <div className={styles.picker}>
-          <EmojiPicker
-            width={360}
-            height={300}
-            lazyLoadEmojis
-            onEmojiClick={emoji => {
-              setMessage(message => (message += emoji.emoji))
-            }}
-            previewConfig={{ showPreview: false }}
-          />
-        </div>
-      )}
-
-      <button
-        onClick={togglePicker}
-        className={cn(
-          styles.button,
-          {
-            [styles.styled]: isPickerOpen,
-          },
-          styles.emodjiButton,
+    <div className={styles.inputBox}>
+      <form noValidate onSubmit={onSubmitHandler} className={styles.form}>
+        {isPickerOpen && (
+          <div className={styles.picker}>
+            <EmojiPicker
+              width={360}
+              height={300}
+              lazyLoadEmojis
+              onEmojiClick={({ emoji }) => {
+                setMessage(message => (message += emoji))
+              }}
+              previewConfig={{ showPreview: false }}
+            />
+          </div>
         )}
-      >
-        <SmilePlus size={20} strokeWidth={2} />
-      </button>
 
-      <button
-        onClick={() => setModalWindow({ modal: 'upload', isOpen: true })}
-        className={cn(styles.button, {
-          [styles.styled]: upload.isOpen,
-        })}
-      >
-        <Paperclip size={20} strokeWidth={2} />
-      </button>
+        <button
+          type="button"
+          onClick={togglePicker}
+          className={cn(
+            styles.button,
+            {
+              [styles.styled]: isPickerOpen,
+            },
+            styles.emodjiButton,
+          )}
+        >
+          <SmilePlus size={20} strokeWidth={2} />
+        </button>
 
-      <input
-        value={message}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setMessage(event.target.value)
-        }}
-        placeholder="Enter something..."
-        className={styles.input}
-      />
+        <button
+          type="button"
+          onClick={() => setModalWindow({ modal: 'upload', isOpen: true })}
+          className={cn(styles.button, {
+            [styles.styled]: upload.isOpen,
+          })}
+        >
+          <Paperclip size={20} strokeWidth={2} />
+        </button>
 
-      <StyledButton type="button" variant="filled" className={styles.submit}>
-        <Send size={18} strokeWidth={2} className={styles.submitIcon} />
-      </StyledButton>
-    </Flex>
+        <input
+          value={message}
+          autoComplete="off"
+          placeholder="Enter something..."
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setMessage(event.target.value)
+          }
+          className={styles.input}
+        />
+
+        <StyledButton type="submit" variant="filled" className={styles.submit}>
+          <Send size={18} strokeWidth={2} className={styles.submitIcon} />
+        </StyledButton>
+      </form>
+    </div>
   )
 })
