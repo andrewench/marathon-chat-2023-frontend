@@ -1,0 +1,9 @@
+.typing {
+  @apply pl-5 text-white text-sm fixed bottom-3;
+
+  text-shadow: 0 0 4px #000;
+
+  & > span {
+    @apply text-cyan-400 font-medium;
+  }
+}

@@ -4,6 +4,7 @@
 
 .innerBox {
   @apply h-full rounded-marathon-20;
+
   box-shadow: 0 -1px 1px #080b1d90;
 }
 
@@ -36,7 +37,7 @@
 }
 
 .chatList {
-  @apply py-7;
+  @apply pt-7 pb-10;
 
   &.emptyList {
     @apply py-0 h-[calc(100vh-100px-50px-40px-80px)];

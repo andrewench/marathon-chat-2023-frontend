@@ -12,7 +12,7 @@ export const ChatTabs: FC = () => {
   return (
     <Flex align="center" className={styles.tabs}>
       <ChatTab tabIndex={0} currentTab={tab} setTab={setTab}>
-        Message
+        All messages
       </ChatTab>
       <ChatTab tabIndex={1} currentTab={tab} setTab={setTab}>
         Participants

@@ -1,25 +1,37 @@
 import EmojiPicker from 'emoji-picker-react'
 import { Paperclip, Send, SmilePlus } from 'lucide-react'
-import { ChangeEvent, FC, FormEvent, memo, useState } from 'react'
+import {
+  ChangeEvent,
+  FC,
+  FormEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import cn from 'clsx'
 
 import { StyledButton } from '@/components/ui'
 
-import { useActions, useAppSelector } from '@/shared/hooks'
+import { SocketService } from '@/services'
 
-import { IMessagePayload } from '@/shared/types'
+import { useActions, useAppSelector, useDebounce } from '@/shared/hooks'
+
+import { TMessagePayload } from '@/shared/types'
 
 import { modals, user } from '@/store/slices'
 
 import styles from './chat-field.module.scss'
 
 interface IChatField {
-  onSubmit?: (payload: IMessagePayload) => void
+  onSubmit?: (payload: TMessagePayload) => void
 }
 
 export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
   const [message, setMessage] = useState<string>('')
+  const [isTyping, setTyping] = useState<boolean>(false)
 
   const { data: userData } = useAppSelector(user)
 
@@ -28,6 +40,33 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
   const { setModalWindow } = useActions()
 
   const { upload } = useAppSelector(modals)
+
+  const cancelTyping = () => {
+    console.log('debounced')
+
+    SocketService.emit('typing', {
+      id: userData.id,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      isTyping: false,
+    })
+
+    setTyping(false)
+  }
+
+  // const debouncedTyping = useDebounce(cancelTyping, 3000)
+
+  // const changeHandler = () => {
+  //   console.log('debounced')
+  // }
+
+  // const debouncedTyping = useDebounce(changeHandler, 5000)
+
+  const debouncedTyping = useDebounce(() => {
+    cancelTyping()
+
+    console.log('debounced')
+  }, 5000)
 
   const togglePicker = () => {
     isPickerOpen ? setPickerOpen(false) : setPickerOpen(true)
@@ -95,9 +134,21 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
           value={message}
           autoComplete="off"
           placeholder="Enter something..."
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
             setMessage(event.target.value)
-          }
+
+            if (!isTyping) {
+              SocketService.emit('typing', {
+                id: userData.id,
+                firstName: userData.firstName,
+                lastName: userData.lastName,
+                isTyping: true,
+              })
+
+              debouncedTyping()
+              setTyping(true)
+            }
+          }}
           className={styles.input}
         />
 

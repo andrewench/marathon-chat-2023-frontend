@@ -2,9 +2,11 @@ import { FC, useEffect, useRef, useState } from 'react'
 import SimpleBar from 'simplebar-react'
 
 import cn from 'clsx'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { ChatField, ChatTabs, Flex } from '@/components/layout'
+
+import { TypingLabel } from '@/components/shared'
 
 import { MessageItem } from '@/components/ui'
 
@@ -12,20 +14,23 @@ import { SocketService } from '@/services'
 
 import { useAppSelector } from '@/shared/hooks'
 
-import { IMessagePayload } from '@/shared/types'
+import { TMessagePayload, TTypingPayload } from '@/shared/types'
 
 import { user } from '@/store/slices'
 
 import styles from './chat.module.scss'
 
 export const Chat: FC = () => {
-  const [messages, setMessages] = useState<IMessagePayload[]>([])
+  const [userNames, setUserNames] = useState<
+    Omit<TTypingPayload, 'isTyping'>[]
+  >([])
+  const [messages, setMessages] = useState<TMessagePayload[]>([])
 
   const { data: userData } = useAppSelector(user)
 
   const scrollBarRef = useRef(null)
 
-  const sendMessage = (payload: IMessagePayload) => {
+  const sendMessage = (payload: TMessagePayload) => {
     SocketService.emit('message', payload)
   }
 
@@ -54,9 +59,33 @@ export const Chat: FC = () => {
       console.log('some error')
     }
 
-    SocketService.on('message', (payload: IMessagePayload) => {
+    SocketService.on('message', (payload: TMessagePayload) => {
       setMessages([...messages, payload])
     })
+
+    SocketService.on(
+      'typing',
+      ({ id, firstName, lastName, isTyping }: TTypingPayload) => {
+        if (isTyping) {
+          const isUserExists = userNames.some(user => user.id === id)
+
+          if (!isUserExists) {
+            setUserNames([
+              ...userNames,
+              {
+                id,
+                firstName,
+                lastName,
+              },
+            ])
+          }
+        } else {
+          const filteredNames = userNames.filter(user => user.id !== id)
+
+          setUserNames(filteredNames)
+        }
+      },
+    )
 
     SocketService.on('connect', handleConnect)
     SocketService.on('disconnect', handleDisconnect)
@@ -67,7 +96,7 @@ export const Chat: FC = () => {
       SocketService.off('disconnect', handleDisconnect)
       SocketService.off('connect_error', handleConnectError)
     }
-  }, [messages])
+  }, [messages, userNames])
 
   return (
     <Flex direction="column" className={cn('scroll-bar', styles.box)}>
@@ -118,6 +147,13 @@ export const Chat: FC = () => {
               </Flex>
             </SimpleBar>
           </div>
+
+          <AnimatePresence>
+            {Boolean(userNames.length) &&
+              !userNames.some(user => user.id === userData.id) && (
+                <TypingLabel names={userNames} />
+              )}
+          </AnimatePresence>
         </Flex>
       </div>
 

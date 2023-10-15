@@ -9,9 +9,10 @@ export interface IUser {
   role: TUserRole
 }
 
-export interface IMessagePayload {
-  id: number
+export type TMessagePayload = Pick<IUser, 'id' | 'firstName' | 'lastName'> & {
   text: string
-  firstName: string
-  lastName: string
+}
+
+export type TTypingPayload = Pick<IUser, 'id' | 'firstName' | 'lastName'> & {
+  isTyping: boolean
 }
