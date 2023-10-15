@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import SimpleBar from 'simplebar-react'
 
 import cn from 'clsx'
@@ -13,11 +13,23 @@ import styles from './chat.module.scss'
 export const Chat: FC = () => {
   const [messages, setMessages] = useState<string[]>([])
 
-  const sendMessage = (message: string) => {
-    setMessages([...messages, message])
+  const scrollBarRef = useRef(null)
 
+  const sendMessage = (message: string) => {
     SocketService.emit('message', message)
   }
+
+  useEffect(() => {
+    if (!scrollBarRef.current) return
+
+    const typedRef = scrollBarRef.current as {
+      contentWrapperEl: HTMLDivElement
+    }
+
+    const scrollableWrap = typedRef.contentWrapperEl
+
+    scrollableWrap.scrollTo(0, scrollableWrap.scrollHeight)
+  }, [messages.length])
 
   useEffect(() => {
     const handleConnect = () => {
@@ -32,6 +44,10 @@ export const Chat: FC = () => {
       console.log('some error')
     }
 
+    SocketService.on('message', (message: string) => {
+      setMessages([...messages, message])
+    })
+
     SocketService.on('connect', handleConnect)
     SocketService.on('disconnect', handleDisconnect)
     SocketService.on('connect_error', handleConnectError)
@@ -41,7 +57,7 @@ export const Chat: FC = () => {
       SocketService.off('disconnect', handleDisconnect)
       SocketService.off('connect_error', handleConnectError)
     }
-  }, [])
+  }, [messages])
 
   return (
     <Flex direction="column" className={cn('scroll-bar', styles.box)}>
@@ -50,7 +66,7 @@ export const Chat: FC = () => {
           <ChatTabs />
 
           <div className={styles.chat}>
-            <SimpleBar className={styles.scrollBar}>
+            <SimpleBar ref={scrollBarRef} className={styles.scrollBar}>
               <Flex
                 direction="column"
                 className={cn(styles.chatList, {
@@ -63,7 +79,7 @@ export const Chat: FC = () => {
                     content="center"
                     className={styles.emptyBox}
                   >
-                    <p className={styles.emptyLabel}>No messages</p>
+                    <p className={styles.emptyLabel}>No messages yet</p>
                   </Flex>
                 )}
 
