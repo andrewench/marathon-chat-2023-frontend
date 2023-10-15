@@ -6,17 +6,27 @@ import { motion } from 'framer-motion'
 
 import { ChatField, ChatTabs, Flex } from '@/components/layout'
 
+import { MessageItem } from '@/components/ui'
+
 import { SocketService } from '@/services'
+
+import { useAppSelector } from '@/shared/hooks'
+
+import { IMessagePayload } from '@/shared/types'
+
+import { user } from '@/store/slices'
 
 import styles from './chat.module.scss'
 
 export const Chat: FC = () => {
-  const [messages, setMessages] = useState<string[]>([])
+  const [messages, setMessages] = useState<IMessagePayload[]>([])
+
+  const { data: userData } = useAppSelector(user)
 
   const scrollBarRef = useRef(null)
 
-  const sendMessage = (message: string) => {
-    SocketService.emit('message', message)
+  const sendMessage = (payload: IMessagePayload) => {
+    SocketService.emit('message', payload)
   }
 
   useEffect(() => {
@@ -44,8 +54,8 @@ export const Chat: FC = () => {
       console.log('some error')
     }
 
-    SocketService.on('message', (message: string) => {
-      setMessages([...messages, message])
+    SocketService.on('message', (payload: IMessagePayload) => {
+      setMessages([...messages, payload])
     })
 
     SocketService.on('connect', handleConnect)
@@ -83,17 +93,28 @@ export const Chat: FC = () => {
                   </Flex>
                 )}
 
-                {messages.map((item, idx) => (
-                  <motion.div
-                    initial={{ opacity: 0, translateY: 30 }}
-                    animate={{ translateY: 0, opacity: 1 }}
-                    transition={{ duration: 0.3 }}
-                    className={styles.myMessage}
-                    key={idx}
-                  >
-                    {item}
-                  </motion.div>
-                ))}
+                {messages.map((message, idx) => {
+                  return message.id === userData.id ? (
+                    <motion.div
+                      initial={{ opacity: 0, translateY: 30 }}
+                      animate={{ translateY: 0, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className={styles.myMessage}
+                      key={idx}
+                    >
+                      {message.text}
+                    </motion.div>
+                  ) : (
+                    <MessageItem
+                      user={{
+                        name: `${message.firstName} ${message.lastName}`,
+                      }}
+                      key={idx}
+                    >
+                      {message.text}
+                    </MessageItem>
+                  )
+                })}
               </Flex>
             </SimpleBar>
           </div>

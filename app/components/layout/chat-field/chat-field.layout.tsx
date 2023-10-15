@@ -8,16 +8,20 @@ import { StyledButton } from '@/components/ui'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
 
-import { modals } from '@/store/slices'
+import { IMessagePayload } from '@/shared/types'
+
+import { modals, user } from '@/store/slices'
 
 import styles from './chat-field.module.scss'
 
 interface IChatField {
-  onSubmit?: (message: string) => void
+  onSubmit?: (payload: IMessagePayload) => void
 }
 
 export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
   const [message, setMessage] = useState<string>('')
+
+  const { data: userData } = useAppSelector(user)
 
   const [isPickerOpen, setPickerOpen] = useState<boolean>(false)
 
@@ -35,7 +39,12 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
     if (!message.length) return
 
     if (onSubmit) {
-      onSubmit(message)
+      onSubmit({
+        id: userData.id,
+        text: message,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+      })
 
       setMessage('')
     }

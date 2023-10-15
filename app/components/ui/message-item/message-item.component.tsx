@@ -1,14 +1,28 @@
 import Image from 'next/image'
 
-import { FC } from 'react'
+import { FC, PropsWithChildren } from 'react'
 
-import { Flex } from '@/components/layout'
+import { motion } from 'framer-motion'
 
 import styles from './message-item.module.scss'
 
-export const MessageItem: FC<{ children: string }> = ({ children }) => {
+interface IMessageItem {
+  user: {
+    name: string
+  }
+}
+
+export const MessageItem: FC<PropsWithChildren<IMessageItem>> = ({
+  user,
+  children,
+}) => {
   return (
-    <Flex className={styles.box}>
+    <motion.div
+      initial={{ opacity: 0, translateY: 30 }}
+      animate={{ translateY: 0, opacity: 1 }}
+      transition={{ duration: 0.3 }}
+      className={styles.box}
+    >
       <Image
         src="/user_1.png"
         alt="User Avatar"
@@ -19,9 +33,10 @@ export const MessageItem: FC<{ children: string }> = ({ children }) => {
       />
 
       <div className={styles.message}>
+        <p className={styles.username}>{user.name}</p>
         <p className={styles.text}>{children}</p>
         <span className={styles.timestamp}>10h ago</span>
       </div>
-    </Flex>
+    </motion.div>
   )
 }
