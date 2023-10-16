@@ -39,7 +39,7 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
 
   const { setModalWindow } = useActions()
 
-  const { upload } = useAppSelector(modals)
+  const { attach } = useAppSelector(modals)
 
   const cancelTyping = () => {
     console.log('debounced')
@@ -53,14 +53,6 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
 
     setTyping(false)
   }
-
-  // const debouncedTyping = useDebounce(cancelTyping, 3000)
-
-  // const changeHandler = () => {
-  //   console.log('debounced')
-  // }
-
-  // const debouncedTyping = useDebounce(changeHandler, 5000)
 
   const debouncedTyping = useDebounce(() => {
     cancelTyping()
@@ -122,9 +114,9 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
 
         <button
           type="button"
-          onClick={() => setModalWindow({ modal: 'upload', isOpen: true })}
+          onClick={() => setModalWindow({ modal: 'attach', isOpen: true })}
           className={cn(styles.button, {
-            [styles.styled]: upload.isOpen,
+            [styles.styled]: attach.isOpen,
           })}
         >
           <Paperclip size={20} strokeWidth={2} />

@@ -9,32 +9,32 @@ import { StyledButton, TextField } from '@/components/ui'
 
 import { useActions } from '@/shared/hooks'
 
-import styles from './upload-modal.module.scss'
+import styles from './attach-modal.module.scss'
 
-interface IUploadModal {
+interface IAttachModal {
   title: string
 }
 
-type TUploadFields = {
+type TAttachFields = {
   file: File
   message: string
 }
 
-export const UploadModalWindow: FC<IUploadModal> = ({ title }) => {
+export const AttachModalWindow: FC<IAttachModal> = ({ title }) => {
   const { setModalWindow } = useActions()
 
-  const methods = useForm<TUploadFields>({
+  const methods = useForm<TAttachFields>({
     mode: 'onChange',
   })
 
-  const onSubmit: SubmitHandler<TUploadFields> = data => {
+  const onSubmit: SubmitHandler<TAttachFields> = data => {
     console.log(data)
   }
 
   return (
     <ModalWindow
       title={title}
-      onClose={() => setModalWindow({ modal: 'upload', isOpen: false })}
+      onClose={() => setModalWindow({ modal: 'attach', isOpen: false })}
     >
       <Form methods={methods} onSubmit={onSubmit} className={styles.form}>
         <div className={styles.wrap}>
@@ -47,7 +47,7 @@ export const UploadModalWindow: FC<IUploadModal> = ({ title }) => {
           />
         </div>
 
-        <TextField<TUploadFields>
+        <TextField<TAttachFields>
           field="message"
           placeholder="Add description"
           multiLine

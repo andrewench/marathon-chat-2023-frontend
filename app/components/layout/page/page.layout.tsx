@@ -5,10 +5,10 @@ import { FC, PropsWithChildren, useEffect } from 'react'
 import { AnimatePresence } from 'framer-motion'
 
 import {
+  AttachModalWindow,
   ConfirmModalWindow,
   Flex,
   SideBar,
-  UploadModalWindow,
 } from '@/components/layout'
 
 import { TokenService } from '@/services'
@@ -26,7 +26,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const router = useRouter()
 
-  const { logout, upload } = useAppSelector(modals)
+  const { logout, attach } = useAppSelector(modals)
 
   const { setUserData, setModalWindow } = useActions()
 
@@ -62,7 +62,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
           />
         )}
 
-        {upload.isOpen && <UploadModalWindow title="Attach file" />}
+        {attach.isOpen && <AttachModalWindow title="Attach file" />}
       </AnimatePresence>
 
       {children}

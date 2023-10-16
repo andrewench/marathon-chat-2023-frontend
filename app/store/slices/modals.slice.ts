@@ -6,7 +6,7 @@ interface IState {
   logout: {
     isOpen: boolean
   }
-  upload: {
+  attach: {
     isOpen: boolean
   }
 }
@@ -15,7 +15,7 @@ const initialState: IState = {
   logout: {
     isOpen: false,
   },
-  upload: {
+  attach: {
     isOpen: false,
   },
 }
