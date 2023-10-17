@@ -4,11 +4,14 @@ import { FC, PropsWithChildren } from 'react'
 
 import { motion } from 'framer-motion'
 
+import { AppConstant } from '@/shared/constants'
+
 import styles from './message-item.module.scss'
 
 interface IMessageItem {
   user: {
     name: string
+    avatar: string | null
   }
 }
 
@@ -24,10 +27,11 @@ export const MessageItem: FC<PropsWithChildren<IMessageItem>> = ({
       className={styles.box}
     >
       <Image
-        src="/user_1.png"
+        src={user.avatar ?? AppConstant.files.avatar.defaultChatAvatar}
         alt="User Avatar"
         width={40}
         height={40}
+        quality={100}
         draggable={false}
         className={styles.avatar}
       />

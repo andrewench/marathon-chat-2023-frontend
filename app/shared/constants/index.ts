@@ -8,6 +8,7 @@ export const AppConstant = {
     avatar: {
       maxSize: 5242880,
       defaultAvatar: '/default_avatar.png',
+      defaultChatAvatar: '/default_chat_avatar.svg',
     },
   },
 

@@ -10,7 +10,11 @@ export interface IUser {
   avatar: string | null
 }
 
-export type TMessagePayload = Pick<IUser, 'id' | 'firstName' | 'lastName'> & {
+export type TMessagePayload = Pick<
+  IUser,
+  'id' | 'firstName' | 'lastName',
+  avatar
+> & {
   text: string
 }
 

@@ -8,14 +8,23 @@ export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: customFetcher,
   tagTypes: ['User'],
-  endpoints: ({ query }) => ({
+  endpoints: ({ query, mutation }) => ({
     getMe: query<IUser, null>({
       query: () => ({
-        url: 'user/me',
+        url: '/user/me',
       }),
       providesTags: () => ['User'],
+    }),
+
+    uploadAvatar: mutation<{ isUploaded: boolean }, FormData>({
+      query: body => ({
+        url: '/user/avatar',
+        method: 'POST',
+        body,
+      }),
+      invalidatesTags: ['User'],
     }),
   }),
 })
 
-export const { useGetMeQuery } = userApi
+export const { useGetMeQuery, useUploadAvatarMutation } = userApi

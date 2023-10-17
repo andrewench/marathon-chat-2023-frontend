@@ -1,12 +1,4 @@
-import {
-  FC,
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { FC, useCallback, useEffect, useId, useMemo, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 
 import cn from 'clsx'
@@ -19,14 +11,18 @@ import { AppConstant } from '@/shared/constants'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
 
-import { modals } from '@/store/slices'
+import { useUploadAvatarMutation } from '@/store/api'
+
+import { modals, user } from '@/store/slices'
 
 import styles from './upload-avatar-modal.module.scss'
 
 export const UploadAvatarModalWindow: FC = () => {
-  const [file, setFile] = useState<File>()
-
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const { data: userData } = useAppSelector(user)
+
+  const [uploadImage] = useUploadAvatarMutation()
 
   const { uploadAvatar } = useAppSelector(modals)
 
@@ -38,18 +34,25 @@ export const UploadAvatarModalWindow: FC = () => {
     setError,
     formState: { errors },
     clearErrors,
-  } = useForm<{ image: File }>({
+    watch,
+    setValue,
+  } = useForm<{ image: File | undefined }>({
     mode: 'onChange',
   })
 
+  const imageFile = watch('image')
+
   const { setModalWindow } = useActions()
 
-  const onSubmit: SubmitHandler<{ image: File }> = payload => {
+  const onSubmit: SubmitHandler<{ image: File | undefined }> = payload => {
     if (!payload.image) return
 
     const formData = new FormData()
 
     formData.append('picture', payload.image)
+    formData.append('userId', String(userData.id))
+
+    uploadImage(formData)
   }
 
   const changeHandler = useCallback(() => {
@@ -65,15 +68,15 @@ export const UploadAvatarModalWindow: FC = () => {
     if (image.size <= AppConstant.files.avatar.maxSize) {
       clearErrors('image')
 
-      setFile(image)
+      setValue('image', image)
     } else {
-      setFile(undefined)
+      setValue('image', undefined)
 
       setError('image', {
         message: 'The image should not exceed 5 mb',
       })
     }
-  }, [clearErrors, setError])
+  }, [clearErrors, setError, setValue])
 
   const overrideRegister = useMemo(
     () => ({
@@ -88,14 +91,12 @@ export const UploadAvatarModalWindow: FC = () => {
   useEffect(() => {
     if (uploadAvatar.isOpen) return
 
-    if (!uploadAvatar.isOpen) {
-      setFile(undefined)
+    setValue('image', undefined)
 
-      if (errors['image']?.message) {
-        clearErrors('image')
-      }
+    if (errors['image']?.message) {
+      clearErrors('image')
     }
-  }, [clearErrors, errors, uploadAvatar.isOpen])
+  }, [clearErrors, errors, setValue, uploadAvatar.isOpen])
 
   return (
     <ModalWindow
@@ -129,9 +130,9 @@ export const UploadAvatarModalWindow: FC = () => {
           <p className={styles.errorLabel}>{errors['image'].message}</p>
         ) : (
           <>
-            {file && Boolean(file.size) && (
+            {imageFile && Boolean(imageFile.size) && (
               <p className={styles.file}>
-                <span>Selected file:</span> {file.name}
+                <span>Selected file:</span> {imageFile.name}
               </p>
             )}
           </>
@@ -140,7 +141,7 @@ export const UploadAvatarModalWindow: FC = () => {
         <div className={styles.actions}>
           <StyledButton
             type="submit"
-            variant={file ? 'filled' : 'disabled'}
+            variant={imageFile ? 'filled' : 'disabled'}
             className={cn(styles.button, styles.upload)}
           >
             Upload
