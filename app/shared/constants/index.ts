@@ -2,6 +2,7 @@ export const AppConstant = {
   app: {
     titlePrefix: 'Marathon | ',
     baseApiUrl: process.env.NEXT_PUBLIC_API_URL,
+    baseServerUrl: process.env.NEXT_PUBLIC_SERVER_URL,
   },
 
   files: {

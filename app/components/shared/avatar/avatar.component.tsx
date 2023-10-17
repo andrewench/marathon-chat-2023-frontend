@@ -44,7 +44,11 @@ export const Avatar: FC<IAvatar> = ({ variant }) => {
           <HexagonMaskIcon id="avatar-hexagon-mask" />
 
           <Image
-            src={userData.avatar ?? AppConstant.files.avatar.defaultAvatar}
+            src={
+              userData.avatar
+                ? `${AppConstant.app.baseServerUrl}/${userData.avatar}`
+                : AppConstant.files.avatar.defaultAvatar
+            }
             alt="Avatar"
             fill
             quality={100}
@@ -95,7 +99,11 @@ export const Avatar: FC<IAvatar> = ({ variant }) => {
           <HexagonMaskMiniIcon id="avatar-hexagon-mask-mini" />
 
           <Image
-            src={userData.avatar ?? AppConstant.files.avatar.defaultAvatar}
+            src={
+              userData.avatar
+                ? `${AppConstant.app.baseServerUrl}/${userData.avatar}`
+                : AppConstant.files.avatar.defaultAvatar
+            }
             alt="Avatar"
             fill
             quality={100}

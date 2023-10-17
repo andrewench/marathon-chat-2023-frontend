@@ -27,7 +27,11 @@ export const MessageItem: FC<PropsWithChildren<IMessageItem>> = ({
       className={styles.box}
     >
       <Image
-        src={user.avatar ?? AppConstant.files.avatar.defaultChatAvatar}
+        src={
+          user.avatar
+            ? `${AppConstant.app.baseServerUrl}/${user.avatar}`
+            : AppConstant.files.avatar.defaultChatAvatar
+        }
         alt="User Avatar"
         width={40}
         height={40}

@@ -14,6 +14,17 @@ const nextConfig = {
     return config
   },
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3002',
+        pathname: '/uploads/images/**',
+      },
+    ],
+  },
+
   async redirects() {
     return [
       {

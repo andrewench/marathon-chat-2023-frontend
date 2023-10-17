@@ -137,7 +137,7 @@ export const Chat: FC = () => {
                     <MessageItem
                       user={{
                         name: `${message.firstName} ${message.lastName}`,
-                        avatar: userData.avatar,
+                        avatar: message.avatar,
                       }}
                       key={idx}
                     >

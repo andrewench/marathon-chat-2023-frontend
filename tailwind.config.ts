@@ -14,9 +14,6 @@ const config: Config = {
         'marathon-15': '15px',
         'marathon-20': '20px',
       },
-      fontFamily: {
-        roboto: ['var(--font-roboto)'],
-      },
     },
   },
   plugins: [],

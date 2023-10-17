@@ -3,7 +3,7 @@
 }
 
 .avatar {
-  @apply mt-[10px] sticky top-[10px] w-10 h-10 min-w-[40px] min-h-[40px];
+  @apply mt-[10px] sticky top-[10px] w-10 h-10 min-w-[40px] min-h-[40px] object-cover rounded-[20px];
 }
 
 .message {

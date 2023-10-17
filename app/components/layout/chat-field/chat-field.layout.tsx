@@ -54,8 +54,6 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
 
   const debouncedTyping = useDebounce(() => {
     cancelTyping()
-
-    console.log('debounced')
   }, 5000)
 
   const togglePicker = () => {
@@ -73,6 +71,7 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
         text: message,
         firstName: userData.firstName,
         lastName: userData.lastName,
+        avatar: userData.avatar,
       })
 
       setMessage('')

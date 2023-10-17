@@ -12,8 +12,7 @@ export interface IUser {
 
 export type TMessagePayload = Pick<
   IUser,
-  'id' | 'firstName' | 'lastName',
-  avatar
+  'id' | 'firstName' | 'lastName' | 'avatar'
 > & {
   text: string
 }

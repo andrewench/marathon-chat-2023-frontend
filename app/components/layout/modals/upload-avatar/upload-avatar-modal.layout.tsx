@@ -1,5 +1,6 @@
 import { FC, useCallback, useEffect, useId, useMemo, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import cn from 'clsx'
 
@@ -10,6 +11,8 @@ import { StyledButton } from '@/components/ui'
 import { AppConstant } from '@/shared/constants'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
+
+import { TErrorResponse } from '@/shared/types'
 
 import { useUploadAvatarMutation } from '@/store/api'
 
@@ -22,7 +25,7 @@ export const UploadAvatarModalWindow: FC = () => {
 
   const { data: userData } = useAppSelector(user)
 
-  const [uploadImage] = useUploadAvatarMutation()
+  const [uploadImage, { data, error }] = useUploadAvatarMutation()
 
   const { uploadAvatar } = useAppSelector(modals)
 
@@ -97,6 +100,26 @@ export const UploadAvatarModalWindow: FC = () => {
       clearErrors('image')
     }
   }, [clearErrors, errors, setValue, uploadAvatar.isOpen])
+
+  useEffect(() => {
+    if (!data) return
+
+    toast.success('Avatar successfully updated')
+
+    setModalWindow({
+      modal: 'uploadAvatar',
+      isOpen: false,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data])
+
+  useEffect(() => {
+    if (!error) return
+
+    const { data } = error as TErrorResponse
+
+    toast.error(data.message)
+  }, [error])
 
   return (
     <ModalWindow
