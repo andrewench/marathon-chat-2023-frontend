@@ -8,13 +8,21 @@
   &.mini {
     @apply w-[48px] h-[53px];
   }
+
+  &:hover {
+    .uploadAvatar {
+      @apply visible;
+
+      animation: show 0.3s linear;
+    }
+  }
 }
 
 .avatar {
   @apply mx-auto relative;
 
   &.normal {
-    @apply w-[140px] h-[160px];
+    @apply w-[130px] h-[150px];
 
     clip-path: url('#avatar-hexagon-mask');
   }
@@ -57,5 +65,22 @@
 
       transform: scale(0.36) rotate(90deg);
     }
+  }
+}
+
+.uploadAvatar {
+  @apply absolute right-[10px] -top-[2px] w-[32px] h-[32px] z-[100] text-white bg-cyan-500 border-none pl-[5px] pb-[1px] invisible;
+
+  clip-path: url('#upload-avatar-mask');
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

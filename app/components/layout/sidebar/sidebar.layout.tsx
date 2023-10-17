@@ -86,6 +86,7 @@ export const SideBar: FC = () => {
                   width={27}
                   height={27}
                   draggable={false}
+                  className={styles.logo}
                 />
 
                 <button className={styles.toggle} onClick={clickHandler}>
@@ -101,7 +102,7 @@ export const SideBar: FC = () => {
                 )}
               </Flex>
 
-              <div className={styles.divider}></div>
+              <div className={styles.divider} />
 
               <div
                 className={cn(styles.meta, {
@@ -111,7 +112,10 @@ export const SideBar: FC = () => {
                 <h1 className={styles.username}>
                   {userData.firstName + ' ' + userData.lastName}
                 </h1>
-                <h2 className={styles.specialty}>Assistant professor</h2>
+                <h2 className={styles.specialty}>
+                  {userData.role &&
+                    userData.role[0].toUpperCase() + userData.role.slice(1)}
+                </h2>
               </div>
             </div>
 

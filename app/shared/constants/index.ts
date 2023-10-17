@@ -4,6 +4,13 @@ export const AppConstant = {
     baseApiUrl: process.env.NEXT_PUBLIC_API_URL,
   },
 
+  files: {
+    avatar: {
+      maxSize: 5242880,
+      defaultAvatar: '/default_avatar.png',
+    },
+  },
+
   login: {
     queries: {
       act: {

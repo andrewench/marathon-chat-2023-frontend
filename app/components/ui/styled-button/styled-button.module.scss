@@ -11,4 +11,8 @@
     @apply p-2 border-[1px] border-[#b3b3b3];
     box-shadow: inset 0 0 2px #00000090;
   }
+
+  &.disabled {
+    @apply text-[#7c7c7c] bg-[#0b0d1c] p-[9px] pointer-events-none;
+  }
 }

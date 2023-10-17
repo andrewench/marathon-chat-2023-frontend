@@ -14,6 +14,7 @@ export { Form } from './form/form.layout'
 export { ModalWindow } from './modal-window/modal-window.layout'
 export { ConfirmModalWindow } from './modals/confirm-modal/confirm-modal.layout'
 export { AttachModalWindow } from './modals/attach-modal/attach-modal.layout'
+export { UploadAvatarModalWindow } from './modals/upload-avatar/upload-avatar-modal.layout'
 
 export { LoginForm } from './login-form/login-form.layout'
 export { SignUpForm } from './signup-form/signup-form.layout'

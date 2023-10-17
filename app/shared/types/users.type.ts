@@ -7,6 +7,7 @@ export interface IUser {
   login: string
   email: string
   role: TUserRole
+  avatar: string | null
 }
 
 export type TMessagePayload = Pick<IUser, 'id' | 'firstName' | 'lastName'> & {

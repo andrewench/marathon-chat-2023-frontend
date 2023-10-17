@@ -7,6 +7,7 @@ const config: Config = {
       colors: {
         'marathon-black': '#00010d',
         'marathon-red': '#e51515',
+        'marathon-blue': '#2286ad',
       },
       borderRadius: {
         'marathon-10': '10px',

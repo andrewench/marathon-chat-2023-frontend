@@ -30,8 +30,12 @@
   }
 }
 
+.logo {
+  @apply hover:-rotate-90 transition-transform duration-500;
+}
+
 .toggle {
-  @apply text-white focus:outline-none;
+  @apply text-white focus:outline-none hover:text-red-400 transition-colors duration-150;
 }
 
 .avatarBox {

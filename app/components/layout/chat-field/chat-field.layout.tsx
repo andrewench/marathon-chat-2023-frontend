@@ -42,8 +42,6 @@ export const ChatField: FC<IChatField> = memo(function ChatField({ onSubmit }) {
   const { attach } = useAppSelector(modals)
 
   const cancelTyping = () => {
-    console.log('debounced')
-
     SocketService.emit('typing', {
       id: userData.id,
       firstName: userData.firstName,

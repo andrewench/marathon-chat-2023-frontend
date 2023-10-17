@@ -2,20 +2,17 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { TRootState } from '@/shared/types'
 
-interface IState {
-  logout: {
-    isOpen: boolean
-  }
-  attach: {
-    isOpen: boolean
-  }
-}
+type TModalKeys = 'logout' | 'attach' | 'uploadAvatar'
+type TState = Record<TModalKeys, Record<'isOpen', boolean>>
 
-const initialState: IState = {
+const initialState: TState = {
   logout: {
     isOpen: false,
   },
   attach: {
+    isOpen: false,
+  },
+  uploadAvatar: {
     isOpen: false,
   },
 }
@@ -28,7 +25,7 @@ const modalsSlice = createSlice({
       state,
       {
         payload: { modal, isOpen },
-      }: PayloadAction<{ modal: keyof IState; isOpen: boolean }>,
+      }: PayloadAction<{ modal: keyof TState; isOpen: boolean }>,
     ) => {
       return {
         ...state,

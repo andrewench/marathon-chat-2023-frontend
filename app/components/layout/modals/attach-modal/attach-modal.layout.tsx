@@ -11,16 +11,12 @@ import { useActions } from '@/shared/hooks'
 
 import styles from './attach-modal.module.scss'
 
-interface IAttachModal {
-  title: string
-}
-
 type TAttachFields = {
   file: File
   message: string
 }
 
-export const AttachModalWindow: FC<IAttachModal> = ({ title }) => {
+export const AttachModalWindow: FC = () => {
   const { setModalWindow } = useActions()
 
   const methods = useForm<TAttachFields>({
@@ -33,7 +29,7 @@ export const AttachModalWindow: FC<IAttachModal> = ({ title }) => {
 
   return (
     <ModalWindow
-      title={title}
+      title="Attach file"
       onClose={() => setModalWindow({ modal: 'attach', isOpen: false })}
     >
       <Form methods={methods} onSubmit={onSubmit} className={styles.form}>

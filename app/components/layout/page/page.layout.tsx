@@ -9,6 +9,7 @@ import {
   ConfirmModalWindow,
   Flex,
   SideBar,
+  UploadAvatarModalWindow,
 } from '@/components/layout'
 
 import { TokenService } from '@/services'
@@ -26,7 +27,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const router = useRouter()
 
-  const { logout, attach } = useAppSelector(modals)
+  const { logout, attach, uploadAvatar } = useAppSelector(modals)
 
   const { setUserData, setModalWindow } = useActions()
 
@@ -62,7 +63,8 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
           />
         )}
 
-        {attach.isOpen && <AttachModalWindow title="Attach file" />}
+        {attach.isOpen && <AttachModalWindow />}
+        {uploadAvatar.isOpen && <UploadAvatarModalWindow />}
       </AnimatePresence>
 
       {children}

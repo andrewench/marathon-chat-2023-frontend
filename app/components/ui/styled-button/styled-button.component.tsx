@@ -9,7 +9,7 @@ import styles from './styled-button.module.scss'
 
 interface IStyledButton {
   type: 'button' | 'submit'
-  variant: 'filled' | 'outline'
+  variant: 'filled' | 'outline' | 'disabled'
   onClick?: () => void
 }
 
@@ -26,11 +26,13 @@ export const StyledButton: FC<PropsWithClassNameAndChildren<IStyledButton>> = ({
       transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       type={type}
       onClick={onClick}
+      disabled={variant === 'disabled'}
       className={cn(
         styles.button,
         {
           [styles.filled]: variant === 'filled',
           [styles.outline]: variant === 'outline',
+          [styles.disabled]: variant === 'disabled',
         },
         className,
       )}
