@@ -15,7 +15,7 @@ export const Fallback: FC = () => {
   return (
     <motion.div
       initial={{ opacity: 1 }}
-      transition={{ duration: 1 }}
+      transition={{ duration: 1, delay: 1 }}
       exit={{ opacity: 0 }}
       className={styles.box}
     />
