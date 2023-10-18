@@ -1,14 +1,14 @@
 import Image from 'next/image'
 
 import { AlignRight } from 'lucide-react'
-import { FC, useRef } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 
 import cn from 'clsx'
-import { animate, motion } from 'framer-motion'
+import { AnimatePresence, animate, motion } from 'framer-motion'
 
 import { Flex, ScrollBox, SideBarMenu } from '@/components/layout'
 
-import { Avatar } from '@/components/shared'
+import { Avatar, Fallback } from '@/components/shared'
 
 import { useActions, useAppSelector } from '@/shared/hooks'
 
@@ -18,6 +18,8 @@ import styles from './sidebar.module.scss'
 
 export const SideBar: FC = () => {
   const sideBarRef = useRef<HTMLDivElement>(null)
+
+  const [isLoaded, setLoaded] = useState<boolean>(false)
 
   const { setSideBar } = useActions()
 
@@ -55,12 +57,20 @@ export const SideBar: FC = () => {
     }
   }
 
+  useEffect(() => {
+    if (!isLoaded && Boolean(Object.values(userData).length)) {
+      setLoaded(true)
+    }
+  }, [isLoaded, userData])
+
   return (
     <motion.div
       ref={sideBarRef}
       initial={{ width: 262 }}
       className={styles.box}
     >
+      <AnimatePresence>{!isLoaded && <Fallback />}</AnimatePresence>
+
       <div className={styles.stickyWrap}>
         <ScrollBox>
           <div

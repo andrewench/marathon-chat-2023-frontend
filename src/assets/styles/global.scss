@@ -5,6 +5,10 @@
 body {
   @apply bg-marathon-black;
 
+  &.keep-scroll {
+    @apply overflow-y-scroll fixed;
+  }
+
   -webkit-font-smoothing: antialiased;
 }
 

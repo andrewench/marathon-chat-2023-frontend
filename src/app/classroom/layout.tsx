@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 
 import { FC, PropsWithChildren } from 'react'
 
+import cn from 'clsx'
+
 import { AppConstant } from '@/shared/constants'
 
 import { roboto } from '@/shared/fonts'
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
 const ClassRoomLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <html lang="en">
-      <body className={roboto.className}>{children}</body>
+      <body className={cn(roboto.className, 'keep-scroll')}>{children}</body>
     </html>
   )
 }
