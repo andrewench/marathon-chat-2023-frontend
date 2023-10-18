@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "app",
+    "baseUrl": "src",
     "paths": {
       "@/components/providers": ["components/providers"],
       "@/components/layout": ["components/layout"],
