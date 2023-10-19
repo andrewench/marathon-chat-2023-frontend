@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { ChangeEvent, useMemo } from 'react'
 import { FieldValues, Path, useFormContext } from 'react-hook-form'
 
 import cn from 'clsx'
@@ -13,12 +13,16 @@ export interface ITextField<T extends FieldValues> {
   autoComplete?: 'on' | 'off'
   type?: TInputRole
   multiLine?: boolean
+  onChange?: (
+    event?: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void
 }
 
 export const TextField = <T extends FieldValues>({
   field,
   autoComplete,
   multiLine,
+  onChange,
   className,
   ...props
 }: PropsWithClassName<ITextField<T>>) => {
@@ -32,12 +36,17 @@ export const TextField = <T extends FieldValues>({
       ...register(field, {
         required: true,
       }),
-      onChange: () => {},
+      onChange: (
+        event?: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+      ) => {
+        if (onChange) onChange(event)
+      },
     }),
-    [field, register],
+    [field, onChange, register],
   )
 
   const fieldProps = {
+    autoComplete,
     ...overrideRegister,
     ...props,
     className: cn(

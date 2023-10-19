@@ -14,11 +14,13 @@ export { ChatField } from './chat-field/chat-field.layout'
 export { ChatTabs } from './chat-tabs/chat-tabs.layout'
 
 export { Form } from './form/form.layout'
+export { FormActions } from './form-actions/form-actions.layout'
 
 export { ModalWindow } from './modal-window/modal-window.layout'
 export { ConfirmModalWindow } from './modals/confirm-modal/confirm-modal.layout'
 export { AttachModalWindow } from './modals/attach-modal/attach-modal.layout'
 export { UploadAvatarModalWindow } from './modals/upload-avatar/upload-avatar-modal.layout'
+export { JoinChatModalWindow } from './modals/join-chat/join-chat-modal.layout'
 
 export { LoginForm } from './login-form/login-form.layout'
 export { SignUpForm } from './signup-form/signup-form.layout'

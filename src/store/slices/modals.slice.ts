@@ -2,7 +2,8 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 import { TRootState } from '@/shared/types'
 
-type TModalKeys = 'logout' | 'attach' | 'uploadAvatar'
+export type TModalKeys = 'logout' | 'attach' | 'uploadAvatar' | 'joinChat'
+
 type TState = Record<TModalKeys, Record<'isOpen', boolean>>
 
 const initialState: TState = {
@@ -13,6 +14,9 @@ const initialState: TState = {
     isOpen: false,
   },
   uploadAvatar: {
+    isOpen: false,
+  },
+  joinChat: {
     isOpen: false,
   },
 }

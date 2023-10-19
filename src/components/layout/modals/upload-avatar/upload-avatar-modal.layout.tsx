@@ -2,11 +2,7 @@ import { FC, useCallback, useEffect, useId, useMemo, useRef } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import cn from 'clsx'
-
-import { ModalWindow } from '@/components/layout'
-
-import { StyledButton } from '@/components/ui'
+import { FormActions, ModalWindow } from '@/components/layout'
 
 import { AppConstant } from '@/shared/constants'
 
@@ -23,13 +19,14 @@ import styles from './upload-avatar-modal.module.scss'
 export const UploadAvatarModalWindow: FC = () => {
   const inputRef = useRef<HTMLInputElement>(null)
 
+  const labelId = useId()
+
   const { data: userData } = useAppSelector(user)
-
-  const [uploadImage, { data, error }] = useUploadAvatarMutation()
-
   const { uploadAvatar } = useAppSelector(modals)
 
-  const labelId = useId()
+  const { setModalWindow } = useActions()
+
+  const [uploadImage, { data, error }] = useUploadAvatarMutation()
 
   const {
     register,
@@ -44,8 +41,6 @@ export const UploadAvatarModalWindow: FC = () => {
   })
 
   const imageFile = watch('image')
-
-  const { setModalWindow } = useActions()
 
   const onSubmit: SubmitHandler<{ image: File | undefined }> = payload => {
     if (!payload.image) return
@@ -161,29 +156,16 @@ export const UploadAvatarModalWindow: FC = () => {
           </>
         )}
 
-        <div className={styles.actions}>
-          <StyledButton
-            type="submit"
-            variant={imageFile ? 'filled' : 'disabled'}
-            className={cn(styles.button, styles.upload)}
-          >
-            Upload
-          </StyledButton>
-
-          <StyledButton
-            type="button"
-            variant="outline"
-            onClick={() =>
-              setModalWindow({
-                modal: 'uploadAvatar',
-                isOpen: false,
-              })
-            }
-            className={styles.button}
-          >
-            Cancel
-          </StyledButton>
-        </div>
+        <FormActions
+          modalWindow="uploadAvatar"
+          confirm={{
+            label: 'Upload',
+            disabled: !imageFile,
+          }}
+          cancel={{
+            label: 'Cancel',
+          }}
+        />
       </form>
     </ModalWindow>
   )

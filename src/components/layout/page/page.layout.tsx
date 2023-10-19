@@ -8,6 +8,7 @@ import {
   AttachModalWindow,
   ConfirmModalWindow,
   Flex,
+  JoinChatModalWindow,
   SideBar,
   UploadAvatarModalWindow,
 } from '@/components/layout'
@@ -27,7 +28,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
   const router = useRouter()
 
-  const { logout, attach, uploadAvatar } = useAppSelector(modals)
+  const { logout, attach, uploadAvatar, joinChat } = useAppSelector(modals)
 
   const { setUserData, setModalWindow } = useActions()
 
@@ -65,6 +66,7 @@ export const PageLayout: FC<PropsWithChildren> = ({ children }) => {
 
         {attach.isOpen && <AttachModalWindow />}
         {uploadAvatar.isOpen && <UploadAvatarModalWindow />}
+        {joinChat.isOpen && <JoinChatModalWindow />}
       </AnimatePresence>
 
       {children}

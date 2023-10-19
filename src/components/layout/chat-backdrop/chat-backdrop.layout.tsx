@@ -3,9 +3,13 @@ import { FC } from 'react'
 
 import { ChatLayout, Flex } from '@/components/layout'
 
+import { useActions } from '@/shared/hooks'
+
 import styles from './chat-backdrop.module.scss'
 
 export const ChatBackdrop: FC = () => {
+  const { setModalWindow } = useActions()
+
   return (
     <ChatLayout
       classNames={{
@@ -22,35 +26,19 @@ export const ChatBackdrop: FC = () => {
           You haven&apos;t been invited to the chat yet
         </p>
 
-        <button className={styles.join}>
+        <button
+          onClick={() =>
+            setModalWindow({
+              modal: 'joinChat',
+              isOpen: true,
+            })
+          }
+          className={styles.join}
+        >
           <Plus size={17} />
           Join chat
         </button>
       </Flex>
     </ChatLayout>
   )
-
-  // return (
-  //   <div className={styles.box}>
-  //     <div className={styles.innerBox}>
-  //       <div className={styles.chatBox}>
-  //         <Flex
-  //           direction="column"
-  //           align="center"
-  //           content="center"
-  //           className={styles.emptyBox}
-  //         >
-  //           <p className={styles.emptyLabel}>
-  //             You haven&apos;t been invited to the chat yet
-  //           </p>
-
-  //           <button className={styles.join}>
-  //             <Plus size={17} />
-  //             Join chat
-  //           </button>
-  //         </Flex>
-  //       </div>
-  //     </div>
-  //   </div>
-  // )
 }
