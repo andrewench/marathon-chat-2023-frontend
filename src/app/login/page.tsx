@@ -25,7 +25,9 @@ const Main: FC = () => {
   const params = useSearchParams()
 
   const {
-    login: { queries },
+    params: {
+      login: { queries },
+    },
   } = AppConstant
 
   const actQuery = params.get(queries.act.key)

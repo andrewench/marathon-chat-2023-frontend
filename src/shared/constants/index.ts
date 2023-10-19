@@ -13,12 +13,21 @@ export const AppConstant = {
     },
   },
 
-  login: {
-    queries: {
-      act: {
-        key: 'act',
-        resolvedValues: ['sign_in', 'sign_up'],
-        defaultValue: 'sign_in',
+  params: {
+    login: {
+      queries: {
+        act: {
+          key: 'act',
+          resolvedValues: ['sign_in', 'sign_up'],
+          defaultValue: 'sign_in',
+        },
+      },
+    },
+    chat: {
+      queries: {
+        room: {
+          key: 'room',
+        },
       },
     },
   },

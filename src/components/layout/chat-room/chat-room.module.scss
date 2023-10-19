@@ -1,0 +1,51 @@
+.box {
+  @apply flex flex-col pb-5 gap-y-5;
+}
+
+.chatBox {
+  @apply flex flex-col;
+}
+
+.chat {
+  @apply w-[360px] h-[calc(100vh-100px-50px-40px-80px)] text-white;
+}
+
+.chatList {
+  @apply pt-7 pb-10;
+
+  &.emptyList {
+    @apply py-0 h-[calc(100vh-100px-50px-40px-80px)];
+  }
+}
+
+.emptyBox {
+  @apply gap-y-3;
+
+  height: inherit;
+}
+
+.frownIcon {
+  @apply mt-2 mx-auto;
+}
+
+.emptyLabel {
+  @apply text-[#222441] text-sm;
+}
+
+.join {
+  & > svg {
+    @apply inline-block mr-1 mb-[2px];
+  }
+
+  @apply bg-marathon-blue text-white rounded-marathon-10 py-2 pl-3 pr-4 text-sm;
+}
+
+.myMessage {
+  @apply mb-5 last:mb-0 text-sm rounded-marathon-10 py-3 px-5 max-w-[70%] min-w-[50px] ml-auto mr-5;
+
+  background: linear-gradient(90deg, #c731ef, #fe5f0c);
+}
+
+.scrollBar {
+  @apply h-full scroll-smooth;
+}

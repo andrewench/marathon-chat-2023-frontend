@@ -5,10 +5,14 @@ export { Content } from './content/content.layout'
 export { SideBarMenu } from './sidebar-menu/sidebar-menu.layout'
 export { ScrollBox } from './scrollbox/scrollbox.layout'
 export { Header } from './header/header.layout'
-export { Chat } from './chat/chat.layout'
 export { VideoPlayer } from './video-player/video-player.layout'
+
+export { ChatLayout } from './chat/chat.layout'
+export { ChatBackdrop } from './chat-backdrop/chat-backdrop.layout'
+export { ChatRoom } from './chat-room/chat-room.layout'
 export { ChatField } from './chat-field/chat-field.layout'
 export { ChatTabs } from './chat-tabs/chat-tabs.layout'
+
 export { Form } from './form/form.layout'
 
 export { ModalWindow } from './modal-window/modal-window.layout'

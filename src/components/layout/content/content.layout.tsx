@@ -1,18 +1,30 @@
+import { useSearchParams } from 'next/navigation'
+
 import { Share2 } from 'lucide-react'
 import { FC, useEffect, useState } from 'react'
 
 import { useAnimate } from 'framer-motion'
 
-import { Chat, Flex, Header, VideoPlayer } from '@/components/layout'
+import {
+  ChatBackdrop,
+  ChatRoom,
+  Flex,
+  Header,
+  VideoPlayer,
+} from '@/components/layout'
 
 import { Divider, Heading } from '@/components/shared'
 
 import { StyledGradientMaskIcon } from '@/components/icons'
 
+import { AppConstant } from '@/shared/constants'
+
 import styles from './content.module.scss'
 
 export const Content: FC = () => {
   const [isOverlay, setOverlay] = useState<boolean>()
+
+  const params = useSearchParams()
 
   const [contentRef, animate] = useAnimate<HTMLDivElement>()
 
@@ -103,7 +115,11 @@ export const Content: FC = () => {
         </div>
 
         <div className={styles.chatBox}>
-          <Chat />
+          {params.get(AppConstant.params.chat.queries.room.key) ? (
+            <ChatRoom />
+          ) : (
+            <ChatBackdrop />
+          )}
         </div>
       </Flex>
     </div>
