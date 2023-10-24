@@ -23,9 +23,7 @@ export const AttachModalWindow: FC = () => {
     mode: 'onChange',
   })
 
-  const onSubmit: SubmitHandler<TAttachFields> = data => {
-    console.log(data)
-  }
+  const onSubmit: SubmitHandler<TAttachFields> = data => {}
 
   return (
     <ModalWindow

@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation'
+
 import { Frown } from 'lucide-react'
 import { FC, useEffect, useRef, useState } from 'react'
 import SimpleBar from 'simplebar-react'
@@ -13,27 +15,87 @@ import { MessageItem } from '@/components/ui'
 
 import { SocketService } from '@/services'
 
-import { useAppSelector } from '@/shared/hooks'
+import { useActions, useAppSelector } from '@/shared/hooks'
 
-import { TMessagePayload, TTypingPayload } from '@/shared/types'
+import { TErrorResponse, TMessagePayload, TTypingPayload } from '@/shared/types'
+
+import { useGetRoomByIdMutation } from '@/store/api'
 
 import { user } from '@/store/slices'
 
 import styles from './chat-room.module.scss'
 
-export const ChatRoom: FC = () => {
+type TMessage = {
+  type: 'message' | 'join'
+  message: TMessagePayload
+}
+
+interface IChatRoom {
+  roomId: string
+}
+
+export const ChatRoom: FC<IChatRoom> = ({ roomId }) => {
   const [userNames, setUserNames] = useState<
     Omit<TTypingPayload, 'isTyping'>[]
   >([])
-  const [messages, setMessages] = useState<TMessagePayload[]>([])
+  const [messages, setMessages] = useState<TMessage[]>([])
+  const [isFetched, setFetched] = useState<boolean>(false)
 
-  const { data: userData } = useAppSelector(user)
+  const router = useRouter()
+
+  const { data: userData, room } = useAppSelector(user)
+
+  const { setRoomData } = useActions()
+
+  const [getRoom, { data: roomData, error: roomError }] =
+    useGetRoomByIdMutation()
 
   const scrollBarRef = useRef(null)
 
   const sendMessage = (payload: TMessagePayload) => {
     SocketService.emit('message', payload)
   }
+
+  useEffect(() => {
+    if (room.roomId) return
+    if (isFetched) return
+    if (!userData.id) return
+
+    getRoom({
+      roomId,
+      userId: userData.id,
+    })
+
+    setFetched(true)
+  }, [getRoom, isFetched, room.roomId, roomId, userData.id])
+
+  useEffect(() => {
+    if (!roomData) return
+
+    setRoomData({
+      roomId: roomData.roomId,
+      userId: userData.id,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [roomData, roomId, userData.id])
+
+  useEffect(() => {
+    if (!roomError) return
+
+    const { data } = roomError as TErrorResponse
+
+    if (data.error === 'CHAT_LOGOUT' || data.error === 'NO_ROOM') {
+      router.push('/classroom')
+    }
+  }, [roomError, router])
+
+  useEffect(() => {
+    if (SocketService.connected) return
+    SocketService.connect()
+    return () => {
+      SocketService.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
     if (!scrollBarRef.current) return
@@ -49,19 +111,35 @@ export const ChatRoom: FC = () => {
 
   useEffect(() => {
     const handleConnect = () => {
-      console.log('[socket]: connected')
+      SocketService.emit('join', {
+        id: userData.id,
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+      })
     }
 
     const handleDisconnect = () => {
       console.log('[socket]: disconnected')
     }
 
-    const handleConnectError = () => {
-      console.log('some error')
-    }
+    SocketService.on('message', (message: TMessagePayload) => {
+      setMessages([
+        ...messages,
+        {
+          type: 'message',
+          message,
+        },
+      ])
+    })
 
-    SocketService.on('message', (payload: TMessagePayload) => {
-      setMessages([...messages, payload])
+    SocketService.on('join', message => {
+      setMessages([
+        ...messages,
+        {
+          type: 'join',
+          message,
+        },
+      ])
     })
 
     SocketService.on(
@@ -90,14 +168,12 @@ export const ChatRoom: FC = () => {
 
     SocketService.on('connect', handleConnect)
     SocketService.on('disconnect', handleDisconnect)
-    SocketService.on('connect_error', handleConnectError)
 
     return () => {
       SocketService.off('connect', handleConnect)
       SocketService.off('disconnect', handleDisconnect)
-      SocketService.off('connect_error', handleConnectError)
     }
-  }, [messages, userNames])
+  }, [messages, userData.firstName, userData.id, userData.lastName, userNames])
 
   return (
     <ChatLayout
@@ -138,28 +214,47 @@ export const ChatRoom: FC = () => {
               </Flex>
             )}
 
-            {messages.map((message, idx) => {
-              return message.id === userData.id ? (
-                <motion.div
-                  initial={{ opacity: 0, translateY: 30 }}
-                  animate={{ translateY: 0, opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  className={styles.myMessage}
-                  key={idx}
-                >
-                  {message.text}
-                </motion.div>
-              ) : (
-                <MessageItem
-                  user={{
-                    name: `${message.firstName} ${message.lastName}`,
-                    avatar: message.avatar,
-                  }}
-                  key={idx}
-                >
-                  {message.text}
-                </MessageItem>
-              )
+            {messages.map(({ type, message }, idx) => {
+              switch (type) {
+                case 'message':
+                  return message.id === userData.id ? (
+                    <motion.div
+                      initial={{ opacity: 0, translateY: 30 }}
+                      animate={{ translateY: 0, opacity: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className={styles.myMessage}
+                      key={idx}
+                    >
+                      {message.text}
+                    </motion.div>
+                  ) : (
+                    <MessageItem
+                      user={{
+                        name: `${message.firstName} ${message.lastName}`,
+                        avatar: message.avatar,
+                      }}
+                      key={idx}
+                    >
+                      {message.text}
+                    </MessageItem>
+                  )
+
+                case 'join':
+                  return (
+                    <div key={idx} className={styles.joinMessageBox}>
+                      <motion.div
+                        initial={{ opacity: 0, translateY: 30 }}
+                        animate={{ translateY: 0, opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className={styles.joinMessage}
+                        key={idx}
+                      >
+                        <span>{`${message.firstName} ${message.lastName}`}</span>{' '}
+                        joined the chat
+                      </motion.div>
+                    </div>
+                  )
+              }
             })}
           </Flex>
         </SimpleBar>

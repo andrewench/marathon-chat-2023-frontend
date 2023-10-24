@@ -1,14 +1,21 @@
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 
 import { Plus, Search, UserX, Users2 } from 'lucide-react'
 import { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react'
 
 import cn from 'clsx'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { Flex } from '@/components/layout'
 
 import { Counter } from '@/components/shared'
+
+import { AppConstant } from '@/shared/constants'
+
+import { useAppSelector } from '@/shared/hooks'
+
+import { user } from '@/store/slices'
 
 import styles from './header.module.scss'
 
@@ -19,6 +26,10 @@ interface IHeader {
 
 export const Header: FC<IHeader> = ({ isOverlay, setOverlay }) => {
   const headerRef = useRef<HTMLDivElement>(null)
+
+  const params = useSearchParams()
+
+  const { room: roomData } = useAppSelector(user)
 
   useEffect(() => {
     const scrollHandler = () => {
@@ -64,14 +75,19 @@ export const Header: FC<IHeader> = ({ isOverlay, setOverlay }) => {
               </Flex>
             </Flex>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-              className={styles.addPeople}
-            >
-              <Plus size={20} strokeWidth={2} />
-              Add people
-            </motion.button>
+            <AnimatePresence>
+              {params.get(AppConstant.params.chat.queries.room.key) && (
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                  className={styles.addPeople}
+                >
+                  <Plus size={20} strokeWidth={2} />
+                  Add people
+                </motion.button>
+              )}
+            </AnimatePresence>
           </Flex>
 
           <Flex align="center" className={styles.searchBarBox}>

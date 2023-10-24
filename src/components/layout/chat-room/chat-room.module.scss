@@ -46,6 +46,18 @@
   background: linear-gradient(90deg, #c731ef, #fe5f0c);
 }
 
+.joinMessageBox {
+  @apply px-5 mb-5;
+
+  & span {
+    @apply text-cyan-400 font-medium;
+  }
+}
+
+.joinMessage {
+  @apply bg-marathon-black text-sm rounded-marathon-10 py-3 px-5 border-[1px] border-neutral-900/70;
+}
+
 .scrollBar {
   @apply h-full scroll-smooth;
 }

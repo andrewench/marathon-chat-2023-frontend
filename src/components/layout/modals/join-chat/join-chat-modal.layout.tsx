@@ -2,6 +2,7 @@ import { useRouter } from 'next/navigation'
 
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { Form, FormActions, ModalWindow } from '@/components/layout'
 
@@ -11,7 +12,13 @@ import { AppConstant } from '@/shared/constants'
 
 import { JoinChatSchema } from '@/shared/schemes'
 
-import { useActions, useConfiguredForm } from '@/shared/hooks'
+import { useActions, useAppSelector, useConfiguredForm } from '@/shared/hooks'
+
+import { TErrorResponse } from '@/shared/types'
+
+import { useGetRoomByIdMutation, useJoinRoomMutation } from '@/store/api'
+
+import { user } from '@/store/slices'
 
 import styles from './join-chat.module.scss'
 
@@ -20,26 +27,50 @@ export const JoinChatModalWindow: FC = () => {
 
   const router = useRouter()
 
-  const { setModalWindow } = useActions()
+  const { data: userData, room: roomData } = useAppSelector(user)
+  const { setModalWindow, setRoomData } = useActions()
 
   const methods = useConfiguredForm<{ roomId: string }>(JoinChatSchema)
 
+  const roomId = methods.watch('roomId')
+
+  const [getRoom, { data, error }] = useGetRoomByIdMutation()
+  const [joinRoom] = useJoinRoomMutation()
+
   const onSubmit: SubmitHandler<{ roomId: string }> = payload => {
-    router.push(
-      `/classroom?${AppConstant.params.chat.queries.room.key}=${payload.roomId}`,
-    )
+    const data = {
+      roomId: payload.roomId,
+      userId: userData.id,
+    }
+
+    setRoomData({
+      roomId: data.roomId,
+      userId: userData.id,
+    })
+
+    getRoom(data)
+  }
+
+  useEffect(() => {
+    if (!data) return
+
+    const { room } = AppConstant.params.chat.queries
+
+    router.push(`/classroom?${room.key}=${roomData.roomId}`)
 
     setModalWindow({
       modal: 'joinChat',
       isOpen: false,
     })
-  }
+  }, [data, joinRoom, roomData.roomId, router, setModalWindow, userData.id])
 
   useEffect(() => {
-    return () => {
-      setDisabled(true)
-    }
-  }, [])
+    if (!error) return
+
+    const { data } = error as TErrorResponse
+
+    toast.error(data.message)
+  }, [error])
 
   return (
     <ModalWindow

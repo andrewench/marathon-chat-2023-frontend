@@ -26,6 +26,8 @@ export const Content: FC = () => {
 
   const params = useSearchParams()
 
+  const roomId = params.get(AppConstant.params.chat.queries.room.key)
+
   const [contentRef, animate] = useAnimate<HTMLDivElement>()
 
   useEffect(() => {
@@ -115,11 +117,7 @@ export const Content: FC = () => {
         </div>
 
         <div className={styles.chatBox}>
-          {params.get(AppConstant.params.chat.queries.room.key) ? (
-            <ChatRoom />
-          ) : (
-            <ChatBackdrop />
-          )}
+          {roomId ? <ChatRoom roomId={roomId} /> : <ChatBackdrop />}
         </div>
       </Flex>
     </div>
